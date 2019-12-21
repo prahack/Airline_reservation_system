@@ -6,6 +6,7 @@ const path = require('path');
 const app = express();
 
 const {getHomePage} = require('./routes/index');
+const {getSignup, addPassenger} = require('./routes/signup');
 //const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage} = require('./routes/player');
 const port = 5000;
 
@@ -39,6 +40,8 @@ app.use(fileUpload()); // configure fileupload
 // routes for the app
 
 app.get('/', getHomePage);
+app.get('/signup',getSignup);
+app.post('/signup',addPassenger);
 // app.get('/add', addPlayerPage);
 // app.get('/edit/:id', editPlayerPage);
 // app.get('/delete/:id', deletePlayer);
