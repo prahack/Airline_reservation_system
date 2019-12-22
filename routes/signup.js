@@ -1,7 +1,7 @@
 const fs = require('fs');
 var md5 = require('md5');
 function validateEmail(email) {
-    var re = new RegExp("\S+@\S+\.\S+");
+    var re = new RegExp("\\S+@\\S+\\.\\S+");
     return re.test(email);
 }
 
