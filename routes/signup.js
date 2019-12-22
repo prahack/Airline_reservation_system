@@ -1,10 +1,15 @@
 const fs = require('fs');
 var md5 = require('md5');
+function validateEmail(email) {
+    var re = new RegExp("\S+@\S+\.\S+");
+    return re.test(email);
+}
 
 module.exports = {
     getSignup: (req, res) => {
+        message =''
         res.render('signup.ejs', {
-            
+            message
         });
     },
     addPassenger: (req, res) => {
@@ -17,42 +22,55 @@ module.exports = {
         let email = req.body.email;
         let password = req.body.password;
         let coPassword = req.body.coPassword;
-        
+        console.log(validateEmail(email));
 
         let emailQuery = "SELECT * FROM `passenger` WHERE email = '" + email + "'";
-
-        db.query(emailQuery, (err, result) => {
-            if (err) {
-                return res.status(500).send(err);
-            }
-            if (result.length > 0) {
-                message = 'Email already exists';
+        if(password != coPassword){
+            message = 'password confirmation fail';
                 res.render('signup.ejs', {
                     message,
                 });
-            } else {
-                let query = "INSERT INTO `passenger` (name, age, email, type, number_of_times) VALUES ('" +
-                            name + "', '" + age + "', '" + email + "', 'Frequent', 0)";
-                        db.query(query, (err, result) => {
-                            if (err) {
-                                return res.status(500).send(err);
-                            } else {
-                                console.log(result['insertId']);
-                                passenger_ID = result['insertId'];
-                                let pw = md5(password);
-                                let q = "INSERT INTO `account` (passenger_ID, password, email) VALUES ('"+
-                                passenger_ID +"', '" + pw +"','" + email + "')";
-                                db.query(q, (err, result) => {
+        } else {
+            if (validateEmail(email)) { 
+                db.query(emailQuery, (err, result) => {
+                    if (err) {
+                        return res.status(500).send(err);
+                    }
+                    if (result.length > 0) {
+                        message = 'Email already exists';
+                        res.render('signup.ejs', {
+                            message,
+                        });
+                    } else {
+                        let query = "INSERT INTO `passenger` (name, age, email, type, number_of_times) VALUES ('" +
+                                    name + "', '" + age + "', '" + email + "', 'Frequent', 0)";
+                                db.query(query, (err, result) => {
                                     if (err) {
                                         return res.status(500).send(err);
-                                    }else {
-                                        res.redirect('/');
+                                    } else {
+                                        console.log(result['insertId']);
+                                        passenger_ID = result['insertId'];
+                                        let pw = md5(password);
+                                        let q = "INSERT INTO `account` (passenger_ID, password, email) VALUES ('"+
+                                        passenger_ID +"', '" + pw +"','" + email + "')";
+                                        db.query(q, (err, result) => {
+                                            if (err) {
+                                                return res.status(500).send(err);
+                                            }else {
+                                                res.redirect('/');
+                                            }
+                                        });
+                                            
                                     }
                                 });
-                                    
-                            }
-                        });
+                    }
+                });
+            } else {
+                message = 'incorrect email address';
+                res.render('signup.ejs', {
+                    message,
+                });
             }
-        });
+        }
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+<!--script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script-->
 <html lang="zxx" class="no-js">
 <head>
     <!-- Mobile Specific Meta -->
@@ -75,11 +75,14 @@
                                     </h5>
 							<form class="form-wrap"style="text-align:center;margin-top:10px; padding-top: 10px; padding-bottom: 10px;"
 							action="" method="post" enctype="multipart/form-data">
-                                <input type="text" class="form-control" name="name" placeholder="Name " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name '">									
-                                <input type="text" class="form-control" name="age" placeholder="Age " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Age '">
-                                <input type="text" class="form-control" name="email" placeholder="Email address " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address '">
-                                <input type="text" class="form-control" name="password" placeholder="Password " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password '">						
-                                <input type="text" class="form-control" name="coPassword" placeholder="Confirm Password " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Confirm Password '">						
+								<% if (message) { %>
+									<p class="text-center text-danger"><%= message %></p>
+								<% } %>
+                                <input type="text" class="form-control" name="name" placeholder="Name " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name '" required>									
+                                <input type="number" step="1" min="1" max="150" class="form-control" name="age" placeholder="Age " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Age '" required>
+                                <input type="email" class="form-control" name="email" placeholder="Email address " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address '" required>
+                                <input type="text" pattern=".{6,}" class="form-control" name="password" placeholder="Password " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password '" required title="minimum 6 characters">						
+                                <input type="text" pattern=".{6,}" class="form-control" name="coPassword" placeholder="Confirm Password " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Confirm Password '" required title="minimum 6 characters">						
                                 <button type="submit" class="primary-btn text-uppercase">Sign Up</button>	
                                 <p style="text-align:center;margin-top:10px; padding-top: 0px;">Have already an account? <a href="login.html" style="text-align:center;margin-top:30px; padding-top: 20px;">Login here</a> </p>					
                             </form>
