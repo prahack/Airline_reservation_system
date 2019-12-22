@@ -72,5 +72,42 @@ module.exports = {
                 });
             }
         }
+    },
+    getLogin: (req, res) => {
+        message =''
+        res.render('login.ejs', {
+            message
+        });
+    },
+    login: (req, res) => {
+        let email = req.body.email;
+        let password = req.body.password;
+        console.log(email);
+        console.log(password);
+        let emailQuery = "SELECT * FROM `account` WHERE email = '" + email + "'";
+        db.query(emailQuery,(err, result) => {
+            let x = (result == 0);
+            if (err) {
+                return res.status(500).send(err);
+            }
+            if ( x ) {
+                message = 'incorrect email or password';
+                res.render('login.ejs', {
+                    message,
+                });
+            } else {
+                console.log(result[0]);
+                let pw = result[0]['password'];
+                if (pw == md5(password)) {
+                    res.redirect('/');
+                } else {
+                    message = 'incorrect email or password';
+                    res.render('login.ejs', {
+                        message,
+                    });
+                }
+            }
+        });
+
     }
 }

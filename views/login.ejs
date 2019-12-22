@@ -72,11 +72,14 @@
                                 <h5 style="text-align:center;margin-top:30px; padding-top: 20px;">
                                         Login
                                     </h5>
-                            <form class="form-wrap">
-                                <input type="text" class="form-control" name="name" placeholder="Email address " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address '">
-                                <input type="text" class="form-control" name="name" placeholder="Password " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password '">						
-                                <p style="padding-top: 20px; padding-bottom: 0px;"><a href="#" class="primary-btn text-uppercase">Login</a>	</p>
-                                <p style="text-align:center;margin-top:30px; padding-top: 10px;">Haven't an account? <a href="signup.html" style="text-align:center;margin-top:30px; padding-top: 20px;">Sign Up here</a> </p>					
+                            <form class="form-wrap" action="" method="post" enctype="multipart/form-data">
+								<% if (message) { %>
+									<p class="text-center text-danger"><%= message %></p>
+								<% } %>
+                                <input type="text" class="form-control" name="email" placeholder="Email address " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address '" required>
+                                <input type="text" class="form-control" name="password" placeholder="Password " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password '" required>						
+								<button type="submit" class="primary-btn text-uppercase">Login</button>	
+                                <p style="text-align:center;margin-top:30px; padding-top: 10px;">Haven't an account? <a href="/signup" style="text-align:center;margin-top:30px; padding-top: 20px;">Sign Up here</a> </p>					
                             </form>
                           </div>
                         </div>
