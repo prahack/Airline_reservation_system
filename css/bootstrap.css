@@ -5992,7 +5992,16 @@ button.bg-dark:focus {
 .align-items-stretch {
   align-items: stretch !important;
 }
-
+/**/
+.align-items-admin {
+  margin-top: 0px;
+  padding-top: 120px;
+  background: none !important;
+  align-items: stretch !important;
+  justify-content: space-between !important;
+  background-size: auto !important;
+}
+/**/
 .align-content-start {
   align-content: flex-start !important;
 }
