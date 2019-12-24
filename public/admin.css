@@ -25,7 +25,8 @@ body{
 .nav_bar ul li a{
     text-decoration: none;
     color: #000000;
-    background: #3c83b9;
+    font-size: 20px;
+    background:rgba(6, 56, 192, 0.562);
     border: 1px solid #000000;
     border-bottom: none;
     padding: 20px 20px 20px 20px;
@@ -40,8 +41,8 @@ body{
 }
 .nav_bar ul li a:hover {
     text-decoration: none;
-    color: #000000;
-    background: #078697;
+    color: #fff;
+    background: #061ea7b7;
     -moz-transition: background-color 200ms ease-in;
     -webkit-transition: background-color 200ms ease-in;
     -ms-transition: background-color 200ms ease-in;
@@ -49,13 +50,13 @@ body{
     transition: background-color 200ms ease-in;
 }
 .nav_bar ul li a#onlink {
-    background: #999797;
+    background: #dd2d2da6;
     color: #000000;
     border-bottom:#30638a;
 }
 .nav_bar ul li a#onlink:hover {
-    background:#078697;
-    color: #000000;
+    background:#dd2d2dbd;
+    color: #fff;
 }
 .main_container{
     margin: auto;
@@ -64,7 +65,7 @@ body{
     border: 1px solid #000000;
     min-height: 410px;
     border-top: none;
-    background:white;
+    background:#dd2d2da6;
     
 }
 .main_container p {
