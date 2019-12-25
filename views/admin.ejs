@@ -91,25 +91,26 @@
                 </ul>
             </div>
             <div class="main_container" action="" method="post" enctype="multipart/form-data">
-                <% if (flight.length > 0) {%>
+                <% if (flights.length > 0) {%>
                 <TABLE class="table"> 
                     <THEAD>
                     <TR>
                         <TH>Flight Id</TH>
                         <TH>Origin</TH>
-                        <TH>Destination</TH>  
+                        <TH>Destination</TH>
+                        <th>Edit / Delete</th>  
                     </TR>
                     </THEAD>
                     <TBODY>
-                        <% flight.forEach((flight, index) => { %>
+                        <% flights.forEach((flight, index) => { %>
                             <tr>
                                 <th scope="row"><%= flight.flight_ID %></th>
                                 <td><%= flight.origin %></td>
                                 <td><%= flight.destination %></td>
-                                <!--td>
-                                    <a href="/edit/<%= player.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                    <a href="/delete/<%= player.id %>" class="btn btn-sm btn-danger">Delete</a>
-                                </td-->
+                                <td>
+                                    <a href="/edit/<%= flight.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
+                                    <a href="/delete/<%= flight.id %>" class="btn btn-sm btn-danger">Delete</a>
+                                </td>
                             </tr>
                         <% }) %>
                     </TBODY>
