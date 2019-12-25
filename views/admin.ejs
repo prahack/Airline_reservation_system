@@ -42,12 +42,6 @@
                           </ul>			
                       </div>
                       <div class="col-lg-6 col-sm-6 col-6 header-top-right">
-                        <!--div class="header-social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-dribbble"></i></a>
-                            <a href="#"><i class="fa fa-behance"></i></a>
-                        </div-->
                       </div>
                   </div>			  					
                 </div>
@@ -62,26 +56,7 @@
                     <ul class="nav-menu">
                       <li><a href="index.html">Home</a></li>
                       <li><a href="about.html">About</a></li>
-                      <li><a href="packages.html">Packages</a></li>
-                      <!--li><a href="hotels.html">Hotels</a></li-->
-                      <!--li><a href="insurance.html">Insurence</a></li-->
-                      <!--li class="menu-has-children"><a href="">Blog</a>
-                        <ul>
-                          <li><a href="blog-home.html">Blog Home</a></li>
-                          <li><a href="blog-single.html">Blog Single</a></li>
-                        </ul>
-                      </li-->	
-                      <!--li class="menu-has-children"><a href="">Pages</a>
-                        <ul>
-                              <li><a href="elements.html">Elements</a></li>
-                              <li class="menu-has-children"><a href="">Level 2 </a>
-                                <ul>
-                                  <li><a href="#">Item One</a></li>
-                                  <li><a href="#">Item Two</a></li>
-                                </ul>
-                              </li>					                		
-                        </ul>
-                      </li-->					          					          		          
+                      <li><a href="packages.html">Packages</a></li>					          					          		          
                       <li><a href="contact.html">Contact</a></li>
                     </ul>
                   </nav><!-- #nav-menu-container -->					      		  
@@ -99,7 +74,7 @@
                 <link href="admin.css" rel="stylesheet">
                 <ul class="nav-menu">
                     <li>
-                        <a href="admin.html" id="onlink">Flights</a>
+                        <a href="/admin-panel" id="onlink">Flights</a>
                     </li>
                     <li>
                         <a href="/admin/airplanes">AirPlanes</a>
@@ -115,174 +90,33 @@
                     </li>
                 </ul>
             </div>
-            <div class="main_container">
+            <div class="main_container" action="" method="post" enctype="multipart/form-data">
+                <% if (flight.length > 0) {%>
                 <TABLE class="table"> 
                     <THEAD>
                     <TR>
-                        <TH>Monday</TH>
-                        <TH>Tuesday</TH>
-                        <TH>Wednesday</TH>
-                        <TH>Thursday</TH>
-                        <TH>Friday</TH>     
+                        <TH>Flight Id</TH>
+                        <TH>Origin</TH>
+                        <TH>Destination</TH>  
                     </TR>
                     </THEAD>
                     <TBODY>
-                    <TR>
-                        <TD>
-                        <div class="subject">Maths</div>
-                        <div class="room">A120</div>
-                        </TD>
-                        <TD>
-                            <div class="subject">Art</div>
-                            <div class="room">C1</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">English</div>
-                            <div class="room">B21</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">Maths</div>
-                            <div class="room">A120</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">Geography</div>
-                            <div class="room">B101</div>
-                        </TD>     
-                    </TR>
-                    <TR>
-                        <TD>        
-                            <div class="subject">Science</div>
-                            <div class="room">Lab1</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">History</div>
-                            <div class="room">B104</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">Spanish</div>
-                            <div class="room">C17</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">P.E.</div>
-                            <div class="room">A Gym</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">Maths</div>
-                            <div class="room">A120</div>
-                        </TD>
-                    </TR>
-                    <TR>
-                        <TD>        
-                            <div class="subject">I.T.</div>
-                            <div class="room">ICT 1</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">English</div>
-                            <div class="room">B21</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">Musique</div>
-                            <div class="room">C5</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">English</div>
-                            <div class="room">B21</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">PSHE</div>
-                            <div class="room">A24</div>
-                        </TD>
-                    </TR>
-                    <TR>
-                        <TD>        
-                            <div class="subject">History</div>
-                            <div class="room">B104</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">Drama</div>
-                            <div class="room">C17</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">Maths</div>
-                            <div class="room">A120</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">Geography</div>
-                            <div class="room">B101</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">P.E.</div>
-                            <div class="room">A Gym</div>
-                        </TD>
-                    </TR>
-                    <TR>
-                        <TD>        
-                            <div class="subject">Spanish</div>
-                            <div class="room">C17</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">Science</div>
-                            <div class="room">Lab1</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">English</div>
-                            <div class="room">B21</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">Science</div>
-                            <div class="room">Lab1</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">R.E.</div>
-                            <div class="room">B18</div>
-                        </TD>
-                    </TR>
-                    <TR>
-                        <TD>        
-                            <div class="subject">Spanish</div>
-                            <div class="room">C17</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">Science</div>
-                            <div class="room">Lab1</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">English</div>
-                            <div class="room">B21</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">Science</div>
-                            <div class="room">Lab1</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">R.E.</div>
-                            <div class="room">B18</div>
-                        </TD>
-                    </TR>
-                    <TR>
-                        <TD>        
-                            <div class="subject">Spanish</div>
-                            <div class="room">C17</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">Science</div>
-                            <div class="room">Lab1</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">English</div>
-                            <div class="room">B21</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">Science</div>
-                            <div class="room">Lab1</div>
-                        </TD>
-                        <TD>        
-                            <div class="subject">R.E.</div>
-                            <div class="room">B18</div>
-                        </TD>
-                    </TR>
+                        <% flight.forEach((flight, index) => { %>
+                            <tr>
+                                <th scope="row"><%= flight.flight_ID %></th>
+                                <td><%= flight.origin %></td>
+                                <td><%= flight.destination %></td>
+                                <!--td>
+                                    <a href="/edit/<%= player.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
+                                    <a href="/delete/<%= player.id %>" class="btn btn-sm btn-danger">Delete</a>
+                                </td-->
+                            </tr>
+                        <% }) %>
                     </TBODY>
                 </TABLE>
+                <% } else { %>
+                    <p class="text-center">No flights found. Go <a href="/add" >here</a> to add flights.</p>
+                <% } %>
             </div>
         </div>
     </div>					
