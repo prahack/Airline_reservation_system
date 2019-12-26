@@ -66,7 +66,9 @@ body{
     min-height: 410px;
     border-top: none;
     background:#dd2d2da6;
-    
+    /*new lines*/
+    position: relative;
+    z-index: 0;
 }
 .main_container p {
     font-size: 14px;
@@ -86,6 +88,12 @@ body{
   }
   
   .table TBODY {
+    /*new lines*/
+    height: 400px;
+    overflow: auto;
+    display: block;
+    width: 1097px;
+    /*end*/
     background-color: #AAAAFF;
   }
   
@@ -93,6 +101,8 @@ body{
     border: 1px solid black;
     padding: 6px;
     text-align: center;
+    /*new lines*/
+    width: 270px;
   }
   /*.table TBODY TR TD:first-child {
     background-color: #FF0066;
