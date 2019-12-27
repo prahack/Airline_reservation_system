@@ -52,7 +52,7 @@ app.post('/admin-panel',loginAdmin);
 app.get('/admin-flight', getAdminFlight);
 app.get('/add-flight', addFlightPage);
 app.post('/add-flight', addFlight);
-app.get('/admin-airplanes', getAirplanes);
+//app.get('/admin-airplanes', getAirplanes);
 app.post('/signup', addPassenger);
 app.post('/login', login);
 // app.get('/add', addPlayerPage);
