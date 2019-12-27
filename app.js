@@ -7,7 +7,8 @@ const app = express();
 
 const {getHomePage} = require('./routes/index');
 const {getSignup, addPassenger, getLogin, login} = require('./routes/passenger');
-const {getAdmin} = require('./routes/admin');
+const {getAdmin, addAdmin, getLoginAdmin, loginAdmin} = require('./routes/admin');
+const {getAdminFlight,addFlightPage, addFlight} = require('./routes/flight');
 const {getAirplanes} = require('./routes/airplane');
 //const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage} = require('./routes/player');
 const port = 5000;
@@ -43,9 +44,15 @@ app.use(fileUpload()); // configure fileupload
 
 app.get('/', getHomePage);
 app.get('/signup', getSignup);
-app.get('/login', getLogin)
-app.get('/admin-panel', getAdmin);
-app.get('/admin/airplanes', getAirplanes);
+app.get('/login', getLogin);
+app.get ('/admin-panel', getAdmin);
+app.post('/admin-panel', addAdmin);
+app.get('/admin-panel', getLoginAdmin);
+app.post('/admin-panel',loginAdmin);
+app.get('/admin-flight', getAdminFlight);
+app.get('/add-flight', addFlightPage);
+app.post('/add-flight', addFlight);
+app.get('/admin-airplanes', getAirplanes);
 app.post('/signup', addPassenger);
 app.post('/login', login);
 // app.get('/add', addPlayerPage);
