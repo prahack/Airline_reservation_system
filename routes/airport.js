@@ -1,40 +1,42 @@
 module.exports = {
-    getAdminAirplane: (req, res) => {
-        let query = "SELECT * FROM `airplane`"; // query database to get all the flights
+    getAdminAirport: (req, res) => {
+        let query = "SELECT * FROM `airport`"; // query database to get all the flights
         // execute query
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
-            res.render('airplane.ejs', {
+            res.render('airport.ejs', {
                 title: ''
-                ,airplanes: result
+                ,airports: result
             });
         });
     },
-    addAirplanePage: (req, res) => {
-        res.render('add-airplanes.ejs', {
-            title: "Welcome to Airplane | Add a new airplane"
+    addAirportPage: (req, res) => {
+        res.render('add-airport.ejs', {
+            title: "Welcome to Airport | Add a new airport"
             ,message: ''
         });
     },
-    addAirplane: (req, res) => {
+    addAirport: (req, res) => {
         let message = '';
-        let type = req.body.type;
+        let airport_code = req.body.airport_code;
+        let name = req.body.name;
+        let location_ID = req.body.location_ID;
 
-        let airplaneQuery = "SELECT * FROM `airplane`";
+        let airportQuery = "SELECT * FROM `airport`";
 
-        db.query(airplaneQuery, (err, result) => {
+        db.query(airportQuery, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             } else {
                 // send the flight's details to the database
-                let query = "INSERT INTO `airplane` (type) VALUES ('" + type +"')";
+                let query = "INSERT INTO `airport` (airport_code, name, location_ID) VALUES ('" + airport_code + "', '" + name +"', '" + location_ID + "')";
             db.query(query, (err, result) => {
                 if (err) {
                     return res.status(500).send(err);
                 }
-                res.redirect('/admin-airplane');
+                res.redirect('/admin-airport');
             });
             }
         });

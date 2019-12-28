@@ -50,7 +50,7 @@
                 <div class="row align-items-center justify-content-between d-flex">
                   <div id="logo">
                     <!--a href="index.html"><img src="img/logo.png" alt="" title="" /></a-->
-                    <h3 style="color: white;">Airline Reservation System | Admin Panel | Add a flight</h2>
+                    <h3 style="color: white;">Airline Reservation System | Admin Panel | Add a Flight Schedules</h2>
                   </div>
                   <nav id="nav-menu-container">
                     <ul class="nav-menu">
@@ -76,11 +76,27 @@
                 <% } %>
                 <div class="form-row">
                     <div class="form-group col-md-8">
-                        <p style="color: rgb(5, 19, 145); font-size: 20px;">Fill this form to add an airplane.</p><br>
+                        <p style="color: rgb(5, 19, 145); font-size: 20px; margin-bottom: -50px;">Fill this form to add a flight schedule.</p><br>
                     </div>
                     <div class="form-group col-md-8">
-                        <p style="color: black; font-size: 15px;">Type of the airplane</p>
-                        <input type="text" class="form-control" name="type" id="type" placeholder="Type" required>
+                        <p style="color: black; font-size: 15px;">ID of the plane</p>
+                        <input type="text" class="form-control" name="plane_ID" id="plane_ID" placeholder="plane ID" required>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <p style="color: black; font-size: 15px;">ID of the flight</p>
+                        <input type="text" class="form-control" name="flight_ID" id="flight_ID" placeholder="Flight ID" required>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <p style="color: black; font-size: 15px;">Time of arriving</p>
+                        <input type="text" class="form-control" name="arrival_time" id="arrival_time" placeholder="Arrival Time" required>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <p style="color: black; font-size: 15px;">Date</p>
+                        <input type="text" class="form-control" name="date" id="date" placeholder="Date" required>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <p style="color: black; font-size: 15px;">Time of departure</p>
+                        <input type="text" class="form-control" name="departure_time" id="departure_time" placeholder="departure time" required>
                     </div>
                     <!--div class="form-group col-md-8">
                         <select id="position" name="position" class="form-control" required>
@@ -92,7 +108,7 @@
                         </select>
                     </div-->
                 </div>
-                <button type="submit" class="primary-btn" style="background-color: rgba(5, 5, 216, 0.829);">Add an airplane</button>	
+                <button type="submit" class="primary-btn" style="background-color: rgba(5, 5, 216, 0.829);">Add a Flight Schedule</button>	
             </form>
         </div>
         </div>

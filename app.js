@@ -9,8 +9,10 @@ const {getHomePage} = require('./routes/index');
 const {getSignup, addPassenger, getLogin, login} = require('./routes/passenger');
 const {getAdmin, addAdmin, getLoginAdmin, loginAdmin} = require('./routes/admin');
 const {getAdminFlight,addFlightPage, addFlight} = require('./routes/flight');
-const {getAirplanes} = require('./routes/airplane');
-//const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage} = require('./routes/player');
+const {getAdminAirplane, addAirplanePage, addAirplane} = require('./routes/airplane');
+const {getAdminAircraft, addAircraftPage, addAircraft} = require('./routes/aircraft');
+const {getAdminAirport, addAirportPage, addAirport} = require('./routes/airport');
+const {getAdminFlightSchedule, addFlightSchedulePage, addFlightSchedule} = require('./routes/flightSchedule');
 const port = 5000;
 
 // create connection to database
@@ -52,14 +54,20 @@ app.post('/admin-panel',loginAdmin);
 app.get('/admin-flight', getAdminFlight);
 app.get('/add-flight', addFlightPage);
 app.post('/add-flight', addFlight);
-//app.get('/admin-airplanes', getAirplanes);
+app.get('/admin-airplane', getAdminAirplane);
+app.get('/add-airplane', addAirplanePage)
+app.post('/add-airplane', addAirplane);
+app.get('/admin-aircraft', getAdminAircraft);
+app.get('/add-aircraft', addAircraftPage)
+app.post('/add-aircraft', addAircraft);
+app.get('/admin-airport', getAdminAirport);
+app.get('/add-airport', addAirportPage)
+app.post('/add-airport', addAirport);
+app.get('/admin-flightSchedule', getAdminFlightSchedule);
+app.get('/add-flightSchedule', addFlightSchedulePage)
+app.post('/add-flightSchedule', addFlightSchedule);
 app.post('/signup', addPassenger);
 app.post('/login', login);
-// app.get('/add', addPlayerPage);
-// app.get('/edit/:id', editPlayerPage);
-// app.get('/delete/:id', deletePlayer);
-// app.post('/add', addPlayer);
-// app.post('/edit/:id', editPlayer);
 
 
 // set the app to listen on the port

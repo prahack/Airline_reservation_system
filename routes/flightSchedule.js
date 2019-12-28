@@ -1,40 +1,45 @@
 module.exports = {
-    getAdminAirplane: (req, res) => {
-        let query = "SELECT * FROM `airplane`"; // query database to get all the flights
+    getAdminFlightSchedule: (req, res) => {
+        let query = "SELECT * FROM `flight_schedule`"; // query database to get all the flights
         // execute query
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
-            res.render('airplane.ejs', {
+            res.render('flightSchedule.ejs', {
                 title: ''
-                ,airplanes: result
+                ,flightSchedules: result
             });
         });
     },
-    addAirplanePage: (req, res) => {
-        res.render('add-airplanes.ejs', {
-            title: "Welcome to Airplane | Add a new airplane"
+    addFlightSchedulePage: (req, res) => {
+        res.render('add-flightSchedule.ejs', {
+            title: "Welcome to Flight Schedule | Add a new flight schedule"
             ,message: ''
         });
     },
-    addAirplane: (req, res) => {
+    addFlightSchedule: (req, res) => {
         let message = '';
-        let type = req.body.type;
+        let flight_schedule_ID = req.body.flight_schedule_ID;
+        let plane_ID = req.body.plane_ID;
+        let flight_ID = req.body.flight_ID;
+        let arrival_time = req.body.arrival_time;
+        let date= req.body.date;
+        let departure_time = req.body.departure_time;
 
-        let airplaneQuery = "SELECT * FROM `airplane`";
+        let flightScheduleQuery = "SELECT * FROM `flight_schedule`";
 
-        db.query(airplaneQuery, (err, result) => {
+        db.query(flightScheduleQuery, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             } else {
                 // send the flight's details to the database
-                let query = "INSERT INTO `airplane` (type) VALUES ('" + type +"')";
+                let query = "INSERT INTO `flight_schedule` (flight_schedule_ID, plane_ID, flight_ID, arrival_time, date, departure_time) VALUES ('" + flight_schedule_ID + "', '" + plane_ID +"', '" + flight_ID + "','" + arrival_time + "','" + date +"','" + departure_time +"')";
             db.query(query, (err, result) => {
                 if (err) {
                     return res.status(500).send(err);
                 }
-                res.redirect('/admin-airplane');
+                res.redirect('/admin-flightSchedule');
             });
             }
         });

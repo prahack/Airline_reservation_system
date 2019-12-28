@@ -50,7 +50,7 @@
                 <div class="row align-items-center justify-content-between d-flex">
                   <div id="logo">
                     <!--a href="index.html"><img src="img/logo.png" alt="" title="" /></a-->
-                    <h3 style="color: white;">Airline Reservation System | Admin Panel | Add a flight</h2>
+                    <h3 style="color: white;">Airline Reservation System | Admin Panel | Add an airport</h2>
                   </div>
                   <nav id="nav-menu-container">
                     <ul class="nav-menu">
@@ -76,11 +76,19 @@
                 <% } %>
                 <div class="form-row">
                     <div class="form-group col-md-8">
-                        <p style="color: rgb(5, 19, 145); font-size: 20px;">Fill this form to add an airplane.</p><br>
+                        <p style="color: rgb(5, 19, 145); font-size: 20px;">Fill this form to add an airport.</p><br>
                     </div>
                     <div class="form-group col-md-8">
-                        <p style="color: black; font-size: 15px;">Type of the airplane</p>
-                        <input type="text" class="form-control" name="type" id="type" placeholder="Type" required>
+                        <p style="color: black; font-size: 15px;">Code of the airport</p>
+                        <input type="text" class="form-control" name="airport_code" id="airport_code" placeholder="Airport code" required>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <p style="color: black; font-size: 15px;">Name of the airport</p>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Name" required>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <p style="color: black; font-size: 15px;">Location ID of the airport</p>
+                        <input type="text" class="form-control" name="location_ID" id="location_ID" placeholder="Location ID" required>
                     </div>
                     <!--div class="form-group col-md-8">
                         <select id="position" name="position" class="form-control" required>
@@ -92,7 +100,7 @@
                         </select>
                     </div-->
                 </div>
-                <button type="submit" class="primary-btn" style="background-color: rgba(5, 5, 216, 0.829);">Add an airplane</button>	
+                <button type="submit" class="primary-btn" style="background-color: rgba(5, 5, 216, 0.829);">Add an airport</button>	
             </form>
         </div>
         </div>

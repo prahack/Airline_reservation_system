@@ -1,40 +1,41 @@
 module.exports = {
-    getAdminAirplane: (req, res) => {
-        let query = "SELECT * FROM `airplane`"; // query database to get all the flights
+    getAdminAircraft: (req, res) => {
+        let query = "SELECT * FROM `aircraft`"; // query database to get all the flights
         // execute query
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
-            res.render('airplane.ejs', {
+            res.render('aircraft.ejs', {
                 title: ''
-                ,airplanes: result
+                ,aircrafts: result
             });
         });
     },
-    addAirplanePage: (req, res) => {
-        res.render('add-airplanes.ejs', {
-            title: "Welcome to Airplane | Add a new airplane"
+    addAircraftPage: (req, res) => {
+        res.render('add-aircraft.ejs', {
+            title: "Welcome to Aircraft | Add a new aircraft"
             ,message: ''
         });
     },
-    addAirplane: (req, res) => {
+    addAircraft: (req, res) => {
         let message = '';
         let type = req.body.type;
+        let capacity = req.body.capacity;
 
-        let airplaneQuery = "SELECT * FROM `airplane`";
+        let aircraftQuery = "SELECT * FROM `aircraft`";
 
-        db.query(airplaneQuery, (err, result) => {
+        db.query(aircraftQuery, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             } else {
                 // send the flight's details to the database
-                let query = "INSERT INTO `airplane` (type) VALUES ('" + type +"')";
+                let query = "INSERT INTO `aircraft` (type, capacity) VALUES ('" + type + "', '" + capacity +"')";
             db.query(query, (err, result) => {
                 if (err) {
                     return res.status(500).send(err);
                 }
-                res.redirect('/admin-airplane');
+                res.redirect('/admin-aircraft');
             });
             }
         });

@@ -14,6 +14,7 @@ module.exports = {
     },
     addFlightPage: (req, res) => {
         let maxID = "SELECT MAX(flight_ID) FROM `flight`";
+        let originQuery = "SELECT origin FROM `flight`";
         db.query(maxID, (err, result) => {
             console.log(result[0]['MAX(flight_ID)']);
             if(err){
@@ -21,7 +22,7 @@ module.exports = {
             }else{
                 res.render('add-flight.ejs', {
                     title: "Welcome to Flight | Add a new flight"
-                    ,maximumID : result[0]['MAX(flight_ID)']
+                    ,maximumID : result[0]['MAX(flight_ID)'] + 1
                 ,message: ''
                 });
             }
@@ -29,7 +30,6 @@ module.exports = {
     },
     addFlight: (req, res) => {
         let message = '';
-        let flight_ID = req.body.flight_ID;
         let origin = req.body.origin;
         let destination = req.body.destination;
 
@@ -38,17 +38,9 @@ module.exports = {
         db.query(flightQuery, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
-            }
-            if (result.length > 0) {
-                message = 'flight already exists';
-                res.render('add-flight.ejs', {
-                    message,
-                });
+            
             } else {
-                // send the flight's details to the database
-                flight_ID = result['insertId'];
-                let query = "INSERT INTO `flight` (flight_ID, origin, destination) VALUES ('" +
-                flight_ID + "', '" + origin + "', '" + destination +"')";
+                let query = "INSERT INTO `flight` (origin, destination) VALUES ('" + origin + "', '" + destination +"')";
             db.query(query, (err, result) => {
                 if (err) {
                     return res.status(500).send(err);

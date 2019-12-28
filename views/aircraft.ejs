@@ -27,8 +27,8 @@
         <link rel="stylesheet" href="css/jquery-ui.css">				
         <link rel="stylesheet" href="css/nice-select.css">							
         <link rel="stylesheet" href="css/animate.min.css">
-        <link rel="stylesheet" href="css/owl.carousel.css">		
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/owl.carousel.css">				
+        <link rel="stylesheet" href="css/main_admin.css">
     </head>
     <body>	
         <header id="header">
@@ -50,7 +50,7 @@
                 <div class="row align-items-center justify-content-between d-flex">
                   <div id="logo">
                     <!--a href="index.html"><img src="img/logo.png" alt="" title="" /></a-->
-                    <h3 style="color: white;">Airline Reservation System | Admin Panel | Add a flight</h2>
+                    <h3 style="color: white;">Airline Reservation System | Admin Panel</h2>
                   </div>
                   <nav id="nav-menu-container">
                     <ul class="nav-menu">
@@ -68,33 +68,60 @@
 <section class="banner-area relative">
     <div class="overlay overlay-bg">
     </div>				
-    <div class="container">
+    <div class="container" style="margin-top: -40px;">
         <div class="row fullscreen align-items-admin ">
-            <form class="text-left form-wrap" action="" method="post" enctype="multipart/form-data">
-                <% if (message != '') { %>
-                    <p class="text-left text-danger" ><%= message %></p>
-                <% } %>
-                <div class="form-row">
-                    <div class="form-group col-md-8">
-                        <p style="color: rgb(5, 19, 145); font-size: 20px;">Fill this form to add an airplane.</p><br>
-                    </div>
-                    <div class="form-group col-md-8">
-                        <p style="color: black; font-size: 15px;">Type of the airplane</p>
-                        <input type="text" class="form-control" name="type" id="type" placeholder="Type" required>
-                    </div>
-                    <!--div class="form-group col-md-8">
-                        <select id="position" name="position" class="form-control" required>
-                            <option selected disabled>Choose position</option>
-                            <option>Goalkeeper</option>
-                            <option>Defender</option>
-                            <option>Midfielder</option>
-                            <option>Forward</option>
-                        </select>
-                    </div-->
+            <div class="nav_bar">
+                <link href="admin.css" rel="stylesheet">
+                <ul class="nav-menu">
+                    <li>
+                        <a href="/admin-flight">Flights</a>
+                    </li>
+                    <li>
+                        <a href="/admin-airplane">AirPlanes</a>
+                    </li>
+                    <li>
+                        <a href="/admin-aircraft" id="onlink">AirCrafts</a>
+                    </li>
+                    <li>
+                        <a href="/admin-airport">Airports</a>
+                    </li>
+                    <li>
+                        <a href="/admin-flightSchedule" style="padding-bottom: 0px;">Flight<br>Schedule</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="main_container" action="" method="post" enctype="multipart/form-data">
+                <div style="float: right;" class="page-wrapper">
+                    <nav class="primary-btn">
+                        <a style="color: white;" href="/add-aircraft" title="Add an aircraft">+ Add an AirCraft</a>
+                    </nav>
                 </div>
-                <button type="submit" class="primary-btn" style="background-color: rgba(5, 5, 216, 0.829);">Add an airplane</button>	
-            </form>
-        </div>
+                <% if (aircrafts.length > 0) {%>
+                <TABLE class="table"> 
+                    <THEAD>
+                    <TR>
+                        <TH>Type</TH>
+                        <TH>Capacity</TH>
+                        <th>Edit / Delete</th>  
+                    </TR>
+                    </THEAD>
+                    <TBODY>
+                        <% aircrafts.forEach((aircrafts, index) => { %>
+                            <tr>
+                                <td scope="row" style="width:400px;"><%= aircrafts.type %></td>
+                                <td style="width:400px;"><%= aircrafts.capacity %></td>
+                                <td style="width:400px;">
+                                    <a href="/edit/<%= aircrafts.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
+                                    <a href="/delete/<%= aircrafts.id %>" class="btn btn-sm btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </TBODY>
+                </TABLE>
+                <% } else { %>
+                    <p class="text-center">No aircrafts found. Go <a href="/add-aircraft" >here</a> to add aircrafts.</p>
+                <% } %>
+            </div>
         </div>
     </div>					
 </section>
@@ -102,6 +129,7 @@
 <!-- End banner Area -->			
         <!-- start footer Area -->		
         <footer class="footer-area section-gap">
+            <link rel="stylesheet" href="css/main_admin.css">
             <div class="container">
 
                 <div class="row">
