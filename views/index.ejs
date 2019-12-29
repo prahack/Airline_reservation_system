@@ -44,8 +44,13 @@
 						</ul>
 					</div>
 					<div class="col-lg-6 col-sm-6 col-6 header-top-right">
+						<% if (email == undefined) { %>
 						<a href="/login" style="padding-right: 30px;">Login</a>
 						<a href="/signup">Sign Up</a>
+						<% } else { %>
+						<a href="/logout">Logout</a>
+						<% } %>
+						<!--p class="text-center text-danger"><%= email %></p-->
 						<!--div class="header-social">
 								<a href="#"><i class="fa fa-facebook"></i></a>
 								<a href="#"><i class="fa fa-twitter"></i></a>
