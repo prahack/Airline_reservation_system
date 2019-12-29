@@ -7,7 +7,7 @@ const app = express();
 const session = require('express-session');
 
 const {getHomePage} = require('./routes/index');
-const {getSignup, addPassenger, getLogin, login} = require('./routes/passenger');
+const {getSignup, addPassenger, getLogin, login, logout} = require('./routes/passenger');
 const {getAdmin, addAdmin, getLoginAdmin, loginAdmin} = require('./routes/admin');
 const {getAdminFlight,addFlightPage, addFlight} = require('./routes/flight');
 const {getAdminAirplane, addAirplanePage, addAirplane} = require('./routes/airplane');
@@ -53,6 +53,7 @@ app.use(session({
 app.get('/', getHomePage);
 app.get('/signup', getSignup);
 app.get('/login', getLogin);
+app.get('/logout', logout);
 app.get ('/admin-panel', getAdmin);
 app.post('/admin-panel', addAdmin);
 app.get('/admin-panel', getLoginAdmin);
