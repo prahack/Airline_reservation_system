@@ -8,7 +8,7 @@ module.exports = {
             }
             res.render('flight.ejs', {
                 title: ''
-                ,flights: result
+                , flights: result
             });
         });
     },
@@ -17,13 +17,13 @@ module.exports = {
         let originQuery = "SELECT origin FROM `flight`";
         db.query(maxID, (err, result) => {
             console.log(result[0]['MAX(flight_ID)']);
-            if(err){
+            if (err) {
                 return res.status(500).send(err);
-            }else{
+            } else {
                 res.render('add-flight.ejs', {
                     title: "Welcome to Flight | Add a new flight"
-                    ,maximumID : result[0]['MAX(flight_ID)'] + 1
-                ,message: ''
+                    , maximumID: result[0]['MAX(flight_ID)'] + 1
+                    , message: ''
                 });
             }
         });
@@ -38,15 +38,15 @@ module.exports = {
         db.query(flightQuery, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
-            
+
             } else {
-                let query = "INSERT INTO `flight` (origin, destination) VALUES ('" + origin + "', '" + destination +"')";
-            db.query(query, (err, result) => {
-                if (err) {
-                    return res.status(500).send(err);
-                }
-                res.redirect('/admin-flight');
-            });
+                let query = "INSERT INTO `flight` (origin, destination) VALUES ('" + origin + "', '" + destination + "')";
+                db.query(query, (err, result) => {
+                    if (err) {
+                        return res.status(500).send(err);
+                    }
+                    res.redirect('/admin-flight');
+                });
             }
         });
     },
@@ -59,8 +59,8 @@ module.exports = {
             }
             res.render('edit-flight.ejs', {
                 title: "Edit  Flight"
-                ,flight: result[0]
-                ,message: ''
+                , flight: result[0]
+                , message: ''
             });
         });
     },
@@ -76,5 +76,37 @@ module.exports = {
             }
             res.redirect('/');
         });
+    },
+
+
+    searchFlightPage: (req, res) => {
+
+        res.render('searchFlight.ejs', {
+            title: "search  Flight"
+            , message: ''
+        });
+    },
+
+    searchFlight: (req, res) => {
+        let origin = req.body.origin;
+        let destination = req.body.destination;
+        console.log(origin);
+        console.log(destination);
+
+
+        let query = "select * from `flight` inner join `flight_schedule` on flight.flight_ID=flight_schedule.flight_ID where  `origin`='" + origin + "', `destination`='" + destination + "'";
+
+        db.query(query, (err, result) => {
+            if (err) {
+                return res.status(400).send(err);
+            }
+            res.render('searchFlight.ejs', {
+                title: 'searchResults'
+                , flights: result
+            });
+
+        });
+
+
     },
 };

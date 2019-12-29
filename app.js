@@ -5,19 +5,19 @@ const mysql = require('mysql');
 const path = require('path');
 const app = express();
 
-const {getHomePage} = require('./routes/index');
-const {getSignup, addPassenger, getLogin, login} = require('./routes/passenger');
-const {getAdmin, addAdmin, getLoginAdmin, loginAdmin} = require('./routes/admin');
-const {getAdminFlight,addFlightPage, addFlight} = require('./routes/flight');
-const {getAdminAirplane, addAirplanePage, addAirplane} = require('./routes/airplane');
-const {getAdminAircraft, addAircraftPage, addAircraft} = require('./routes/aircraft');
-const {getAdminAirport, addAirportPage, addAirport} = require('./routes/airport');
-const {getAdminFlightSchedule, addFlightSchedulePage, addFlightSchedule} = require('./routes/flightSchedule');
+const { getHomePage } = require('./routes/index');
+const { getSignup, addPassenger, getLogin, login } = require('./routes/passenger');
+const { getAdmin, addAdmin, getLoginAdmin, loginAdmin } = require('./routes/admin');
+const { getAdminFlight, addFlightPage, addFlight, searchFlight, searchFlightPage } = require('./routes/flight');
+const { getAdminAirplane, addAirplanePage, addAirplane } = require('./routes/airplane');
+const { getAdminAircraft, addAircraftPage, addAircraft } = require('./routes/aircraft');
+const { getAdminAirport, addAirportPage, addAirport } = require('./routes/airport');
+const { getAdminFlightSchedule, addFlightSchedulePage, addFlightSchedule } = require('./routes/flightSchedule');
 const port = 5000;
 
 // create connection to database
 // the mysql.createConnection function takes in a configuration object which contains host, user, password and the database name.
-const db = mysql.createConnection ({
+const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
@@ -47,10 +47,10 @@ app.use(fileUpload()); // configure fileupload
 app.get('/', getHomePage);
 app.get('/signup', getSignup);
 app.get('/login', getLogin);
-app.get ('/admin-panel', getAdmin);
+app.get('/admin-panel', getAdmin);
 app.post('/admin-panel', addAdmin);
 app.get('/admin-panel', getLoginAdmin);
-app.post('/admin-panel',loginAdmin);
+app.post('/admin-panel', loginAdmin);
 app.get('/admin-flight', getAdminFlight);
 app.get('/add-flight', addFlightPage);
 app.post('/add-flight', addFlight);
@@ -68,6 +68,9 @@ app.get('/add-flightSchedule', addFlightSchedulePage)
 app.post('/add-flightSchedule', addFlightSchedule);
 app.post('/signup', addPassenger);
 app.post('/login', login);
+app.get('/searchFlight', searchFlightPage);
+app.post('/searchFlight', searchFlight);
+
 
 
 // set the app to listen on the port

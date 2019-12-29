@@ -1,0 +1,42 @@
+<div class="table-wrapper">
+    <% if (flights.length > 0) {%>
+    <table class="table table-hovered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Flight_Schedule_ID</th>
+                <th scope="col">flight_ID</th>
+                <th scope="col">Origin</th>
+                <th scope="col">Destination</th>
+                <th scope="col">arrivaltime</th>
+                <th scope="col">departuretime</th>
+                <th scope="col">date</th>
+                <th scope="col">Book</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% flights.forEach((flight, index) => { %>
+            <tr>
+                <th scope="row"><%= flight.flight_schedule_ID %></th>
+                <td><%= flight.flight_ID %></td>
+                <td><%= flight.origin %></td>
+                <td><%= flight.destination %></td>
+                <td><%= flight.arrivaltime %></td>
+                <td><%= flight.date %></td>
+                <td>@<%= flight.departuretime %></td>
+                <td>
+                    <a href="/edit/<%= player.id %>" target="_blank" rel="noopener"
+                        class="btn btn-sm btn-success">Adults</a>
+                    <a href="/delete/<%= player.id %>" class="btn btn-sm btn-danger">child</a>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <% } else { %>
+    <p class="text-center">No flights found. </p>
+    <% } %>
+</div>
+</div>
+</body>
+
+</html>
