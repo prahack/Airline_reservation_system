@@ -77,36 +77,4 @@ module.exports = {
             res.redirect('/');
         });
     },
-
-
-    searchFlightPage: (req, res) => {
-
-        res.render('searchFlight.ejs', {
-            title: "search  Flight"
-            , message: ''
-        });
-    },
-
-    searchFlight: (req, res) => {
-        let origin = req.body.origin;
-        let destination = req.body.destination;
-        console.log(origin);
-        console.log(destination);
-
-
-        let query = "select * from `flight` inner join `flight_schedule` on flight.flight_ID=flight_schedule.flight_ID where  `origin`='" + origin + "', `destination`='" + destination + "'";
-
-        db.query(query, (err, result) => {
-            if (err) {
-                return res.status(400).send(err);
-            }
-            res.render('searchFlight.ejs', {
-                title: 'searchResults'
-                , flights: result
-            });
-
-        });
-
-
-    },
 };

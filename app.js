@@ -9,11 +9,14 @@ const session = require('express-session');
 const { getHomePage } = require('./routes/index');
 const { getSignup, addPassenger, getLogin, login } = require('./routes/passenger');
 const { getAdmin, addAdmin, getLoginAdmin, loginAdmin } = require('./routes/admin');
-const { getAdminFlight, addFlightPage, addFlight, searchFlight, searchFlightPage } = require('./routes/flight');
+const { getAdminFlight, addFlightPage, addFlight } = require('./routes/flight');
 const { getAdminAirplane, addAirplanePage, addAirplane } = require('./routes/airplane');
 const { getAdminAircraft, addAircraftPage, addAircraft } = require('./routes/aircraft');
 const { getAdminAirport, addAirportPage, addAirport } = require('./routes/airport');
 const { getAdminFlightSchedule, addFlightSchedulePage, addFlightSchedule } = require('./routes/flightSchedule');
+const { searchFlight, searchFlightPage } = require('./routes/searchFlight');
+const { flightBooking, flightBookingPage } = require('./routes/bookFlight');
+
 const port = 5000;
 
 // create connection to database
@@ -45,7 +48,7 @@ app.use(fileUpload()); // configure fileupload
 
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
-  secret: 'abcd',
+    secret: 'abcd',
 }))
 
 // routes for the app
@@ -76,6 +79,8 @@ app.post('/signup', addPassenger);
 app.post('/login', login);
 app.get('/searchFlight', searchFlightPage);
 app.post('/searchFlight', searchFlight);
+app.get('/bookFlight', flightBookingPage);
+app.post('/bookFlight', flightBooking);
 
 
 
