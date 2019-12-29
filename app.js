@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const path = require('path');
 const app = express();
+const session = require('express-session');
 
 const { getHomePage } = require('./routes/index');
 const { getSignup, addPassenger, getLogin, login } = require('./routes/passenger');
@@ -41,6 +42,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); // parse form data client
 app.use(express.static(path.join(__dirname, 'public'))); // configure express to use public folder
 app.use(fileUpload()); // configure fileupload
+
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: 'abcd',
+}))
 
 // routes for the app
 

@@ -99,6 +99,7 @@ module.exports = {
                 console.log(result[0]);
                 let pw = result[0]['password'];
                 if (pw == md5(password)) {
+                    req.session.email = email;
                     res.redirect('/');
                 } else {
                     message = 'incorrect email or password';
