@@ -83,13 +83,13 @@
                         <a href="/admin-aircraft">AirCrafts</a>
                     </li>
                     <li>
-                        <a href="/admin-airport" id="onlink">Airports</a>
+                        <a href="/admin-airport">Airports</a>
                     </li>
                     <li>
                         <a href="/admin-flightSchedule" style="padding-bottom: 0px;">Flight<br>Schedule</a>
                     </li>
                     <li>
-                        <a href="/admin-flightDelay" style="padding-bottom: 0px;">Flight<br>Delay</a>
+                        <a href="/admin-flightDelay" id="onlink" style="padding-bottom: 0px;">Flight<br>Delay</a>
                     </li>
                     <li>
                         <a href="/admin-location">Locations</a>
@@ -102,35 +102,37 @@
             <div class="main_container" action="" method="post" enctype="multipart/form-data">
                 <div style="float: right;" class="page-wrapper">
                     <nav class="primary-btn">
-                        <a style="color: white;" href="/add-airport" title="Add an airport">+ Add an AirPort</a>
+                        <a style="color: white;" href="/add-flightDelay" title="Add a Flight Delay">+ Add a FlightDelay</a>
                     </nav>
                 </div>
-                <% if (airports.length > 0) {%>
+                <% if (flightDelay.length > 0) {%>
                 <TABLE class="table"> 
                     <THEAD>
                     <TR>
-                        <TH>AirPort Code</TH>
-                        <TH>Name</TH>
-                        <TH>Location ID</TH>
+                        <TH>Flight Delay ID</TH>
+                        <TH>Flight Schedule ID</TH>
+                        <TH>Delayed Time</TH>
+                        <TH>Reason</TH>
                         <th>Edit / Delete</th>  
                     </TR>
                     </THEAD>
                     <TBODY>
-                        <% airports.forEach((airports, index) => { %>
+                        <% flightDelay.forEach((flightDelay, index) => { %>
                             <tr>
-                                <td scope="row"><%= airports.airport_code %></td>
-                                <td><%= airports.name %></td>
-                                <td><%= airports.location_ID %></td>
+                                <td scope="row"><%= flightDelay.delay_ID %></td>
+                                <td><%= flightDelay.flight_schedule_ID %></td>
+                                <td><%= flightDelay.delayed_time %></td>
+                                <td><%= flightDelay.reason %></td>
                                 <td>
-                                    <a href="/edit/<%= airports.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                    <a href="/delete/<%= airports.id %>" class="btn btn-sm btn-danger">Delete</a>
+                                    <a href="/edit/<%= flightDelay.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
+                                    <a href="/delete/<%= flightDelay.id %>" class="btn btn-sm btn-danger">Delete</a>
                                 </td>
                             </tr>
                         <% }) %>
                     </TBODY>
                 </TABLE>
                 <% } else { %>
-                    <p class="text-center" style="color: black;">No airports found. Go <a href="/add-airport" >here</a> to add airportss.</p>
+                    <p class="text-center" style="color: black;">No flight Delays found. Go <a href="/add-flightDelay" >here</a> to add flight Delays.</p>
                 <% } %>
             </div>
         </div>

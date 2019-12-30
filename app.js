@@ -14,6 +14,9 @@ const {getAdminAirplane, addAirplanePage, addAirplane} = require('./routes/airpl
 const {getAdminAircraft, addAircraftPage, addAircraft} = require('./routes/aircraft');
 const {getAdminAirport, addAirportPage, addAirport} = require('./routes/airport');
 const {getAdminFlightSchedule, addFlightSchedulePage, addFlightSchedule} = require('./routes/flightSchedule');
+const {getAdminFlightDelay, addFlightDelayPage, addFlightDelay} = require('./routes/flightDelay');
+const {getAdminLocation, addLocationPage, addLocation} = require('./routes/location');
+const {getAdminPrice, addPricePage, addPrice} = require('./routes/price');
 const { searchFlight, searchFlightPage } = require('./routes/searchFlight');
 const { flightBooking, flightBookingPage } = require('./routes/bookFlight');
 const port = 5000;
@@ -77,6 +80,15 @@ app.post('/add-airport', addAirport);
 app.get('/admin-flightSchedule', getAdminFlightSchedule);
 app.get('/add-flightSchedule', addFlightSchedulePage)
 app.post('/add-flightSchedule', addFlightSchedule);
+app.get('/admin-flightDelay', getAdminFlightDelay);
+app.get('/add-flightDelay', addFlightDelayPage)
+app.post('/add-flightdelay', addFlightDelay);
+app.get('/admin-location', getAdminLocation);
+app.get('/add-location', addLocationPage)
+app.post('/add-location', addLocation);
+app.get('/admin-price', getAdminPrice);
+app.get('/add-price', addPricePage)
+app.post('/add-price', addPrice);
 app.post('/signup', addPassenger);
 app.post('/login', login);
 app.get('/searchFlight', searchFlightPage);
