@@ -86,7 +86,7 @@
                         <a href="/admin-airport">Airports</a>
                     </li>
                     <li>
-                        <a href="/admin-flightSchedule" id="onlink" style="padding-bottom: 0px;">Flight<br>Schedule</a>
+                        <a href="/admin-flightSchedule" style="padding-bottom: 0px;">Flight<br>Schedule</a>
                     </li>
                     <li>
                         <a href="/admin-flightDelay" style="padding-bottom: 0px;">Flight<br>Delay</a>
@@ -95,7 +95,7 @@
                         <a href="/admin-location">Locations</a>
                     </li>
                     <li>
-                        <a href="/admin-price">Prices</a>
+                        <a href="/admin-price" id="onlink">Prices</a>
                     </li>
                     <li>
                         <a href="/admin-seat">Seats</a>
@@ -108,41 +108,37 @@
             <div class="main_container" action="" method="post" enctype="multipart/form-data">
                 <div style="float: right;" class="page-wrapper">
                     <nav class="primary-btn">
-                        <a style="color: white;" href="/add-flightSchedule" title="Add a Flight Schedule">+ Add a FlightSchedule</a>
+                        <a style="color: white;" href="/add-price" title="Add a price">+ Add a Price</a>
                     </nav>
                 </div>
-                <% if (flightSchedules.length > 0) {%>
+                <% if (price.length > 0) {%>
                 <TABLE class="table"> 
                     <THEAD>
                     <TR>
-                        <TH>flight Schedule ID</TH>
-                        <TH>Plane ID</TH>
-                        <TH>Flight ID</TH>
-                        <TH>Arrival Time</TH>
-                        <TH>Date</TH>
-                        <TH>Departure Time</TH>
+                        <TH>Flight Schedule ID</TH>
+                        <TH>Economy Price</TH>
+                        <TH>Business Price</TH>
+                        <TH>Platinum Price</TH>
                         <th>Edit / Delete</th>  
                     </TR>
                     </THEAD>
                     <TBODY>
-                        <% flightSchedules.forEach((flightSchedules, index) => { %>
+                        <% price.forEach((price, index) => { %>
                             <tr>
-                                <td scope="row"><%= flightSchedules.flight_schedule_ID %></td>
-                                <td><%= flightSchedules.plane_ID %></td>
-                                <td><%= flightSchedules.flight_ID %></td>
-                                <td><%= flightSchedules.arrival_time %></td>
-                                <td><%= flightSchedules.date %></td>
-                                <td><%= flightSchedules.departure_time %></td>
+                                <td scope="row"><%= price.flight_schedule_ID %></td>
+                                <td><%= price.economy_price %></td>
+                                <td><%= price.business_price %></td>
+                                <td><%= price.platinum_price %></td>
                                 <td>
-                                    <a href="/edit/<%= flightSchedules.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                    <a href="/delete/<%= flightSchedules.id %>" class="btn btn-sm btn-danger">Delete</a>
+                                    <a href="/edit/<%= price.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
+                                    <a href="/delete/<%= price.id %>" class="btn btn-sm btn-danger">Delete</a>
                                 </td>
                             </tr>
                         <% }) %>
                     </TBODY>
                 </TABLE>
                 <% } else { %>
-                    <p class="text-center" style="color: black;">No flight Schedules found. Go <a href="/add-flightSchedule" >here</a> to add flight Schedules.</p>
+                    <p class="text-center" style="color: black;">No prices found. Go <a href="/add-price" >here</a> to add prices.</p>
                 <% } %>
             </div>
         </div>

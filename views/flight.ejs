@@ -73,7 +73,7 @@
             <div class="nav_bar">
                 <link href="admin.css" rel="stylesheet">
                 <ul class="nav-menu">
-                    <li>
+                    <li style="margin-left: -15px;">
                         <a href="/admin-flight" id="onlink">Flights</a>
                     </li>
                     <li>
@@ -87,6 +87,21 @@
                     </li>
                     <li>
                         <a href="/admin-flightSchedule" style="padding-bottom: 0px;">Flight<br>Schedule</a>
+                    </li>
+                    <li>
+                        <a href="/admin-flightDelay" style="padding-bottom: 0px;">Flight<br>Delay</a>
+                    </li>
+                    <li>
+                        <a href="/admin-location">Locations</a>
+                    </li>
+                    <li>
+                        <a href="/admin-price">Prices</a>
+                    </li>
+                    <li>
+                        <a href="/admin-seat">Seats</a>
+                    </li>
+                    <li>
+                        <a href="/admin-report">Reports</a>
                     </li>
                 </ul>
             </div>
@@ -121,7 +136,7 @@
                     </TBODY>
                 </TABLE>
                 <% } else { %>
-                    <p class="text-center">No flights found. Go <a href="/add" >here</a> to add flights.</p>
+                    <p class="text-center" style="color: black;">No flights found. Go <a href="/add" >here</a> to add flights.</p>
                 <% } %>
             </div>
         </div>

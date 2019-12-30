@@ -8,12 +8,17 @@ const session = require('express-session');
 
 const { getHomePage } = require('./routes/index');
 const { getSignup, addPassenger, getLogin, login, logout } = require('./routes/passenger');
-const { getAdmin, addAdmin, getLoginAdmin, loginAdmin } = require('./routes/admin');
+const { getAdmin, addAdmin, getLoginAdmin, loginAdmin, getbookingsByPassengerType, bookingsByPassengerType } = require('./routes/admin');
 const { getAdminFlight, addFlightPage, addFlight, editFlightPage, editFlight } = require('./routes/flight');
 const { getAdminAirplane, addAirplanePage, addAirplane } = require('./routes/airplane');
 const { getAdminAircraft, addAircraftPage, addAircraft } = require('./routes/aircraft');
 const { getAdminAirport, addAirportPage, addAirport } = require('./routes/airport');
 const { getAdminFlightSchedule, addFlightSchedulePage, addFlightSchedule } = require('./routes/flightSchedule');
+const { getAdminFlightDelay, addFlightDelayPage, addFlightDelay } = require('./routes/flightDelay');
+const { getAdminLocation, addLocationPage, addLocation } = require('./routes/location');
+const { getAdminPrice, addPricePage, addPrice } = require('./routes/price');
+const { getAdminSeat, addSeatPage, addSeat } = require('./routes/seat');
+const { getAdminReport } = require('./routes/report');
 const { searchFlight, searchFlightPage } = require('./routes/searchFlight');
 const { flightBooking, flightBookingPage } = require('./routes/bookFlight');
 const { searchByFlightNoPage, searchByFlightNo, numberOFPassengers, numberOFPassengersPage } = require('./routes/adminSearch');
@@ -76,8 +81,23 @@ app.get('/admin-airport', getAdminAirport);
 app.get('/add-airport', addAirportPage)
 app.post('/add-airport', addAirport);
 app.get('/admin-flightSchedule', getAdminFlightSchedule);
-app.get('/add-flightSchedule', addFlightSchedulePage)
+app.get('/add-flightSchedule', addFlightSchedulePage);
+app.get('/bookings-passenger', getbookingsByPassengerType);
+app.post('/bookings-passenger', bookingsByPassengerType);
 app.post('/add-flightSchedule', addFlightSchedule);
+app.get('/admin-flightDelay', getAdminFlightDelay);
+app.get('/add-flightDelay', addFlightDelayPage)
+app.post('/add-flightdelay', addFlightDelay);
+app.get('/admin-location', getAdminLocation);
+app.get('/add-location', addLocationPage)
+app.post('/add-location', addLocation);
+app.get('/admin-price', getAdminPrice);
+app.get('/add-price', addPricePage)
+app.post('/add-price', addPrice);
+app.get('/admin-seat', getAdminSeat);
+app.get('/add-seat', addSeatPage)
+app.post('/add-seat', addSeat);
+app.get('/admin-report', getAdminReport);
 app.post('/signup', addPassenger);
 app.post('/login', login);
 app.get('/searchFlight', searchFlightPage);
