@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+    .table-wrapper {
+        margin-top: 50px;
+    }
+</style>
+
+<div class="table-wrapper">
+    <% if (flights.length > 0) {%>
+    <table class="table table-hovered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Flight ID</th>
+                <th scope="col">Origin</th>
+                <th scope="col"> Destination</th>
+                <th scope="col"> Arrival Time</th>
+                <th scope="col">Date</th>
+                <th scope="col">Departure Time</th>
+                <th scope="col">Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <% flights.forEach((flight, index) => { %>
+            <tr>
+                <th scope="row"><%= flight.flight_ID %></th>
+                <td><%= flight.origin %></td>
+                <td><%= flight.destination %></td>
+                <td><%= flight.arrival_time %></td>
+                <td><%= flight.date %></td>
+                <td>@<%= flight.departure_time %></td>
+                <td>
+                    <a href="/bookFlight" target="_blank" rel="noopener" class="btn btn-sm btn-success">Book</a>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <% } %>
+</div>
+</div>
+</body>
+
+</html>

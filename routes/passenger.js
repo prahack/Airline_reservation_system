@@ -74,10 +74,19 @@ module.exports = {
         }
     },
     getLogin: (req, res) => {
-        message =''
-        res.render('login.ejs', {
-            message
-        });
+        message ='';
+        console.log(req.session.email);
+        if(req.session.email == undefined) {
+            res.render('login.ejs', {
+                message
+            });
+        } else {
+            res.render('index.ejs', {
+                title: '',
+                email:req.session.email
+            });
+        }
+        
     },
     login: (req, res) => {
         let email = req.body.email;
@@ -99,6 +108,7 @@ module.exports = {
                 console.log(result[0]);
                 let pw = result[0]['password'];
                 if (pw == md5(password)) {
+                    req.session.email = email;
                     res.redirect('/');
                 } else {
                     message = 'incorrect email or password';
@@ -109,5 +119,10 @@ module.exports = {
             }
         });
 
+    },
+    logout: (req, res) => {
+        message = '';
+        req.session.destroy();
+        res.redirect('/login');
     }
 }

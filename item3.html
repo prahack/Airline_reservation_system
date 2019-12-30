@@ -28,7 +28,7 @@
         <link rel="stylesheet" href="css/nice-select.css">							
         <link rel="stylesheet" href="css/animate.min.css">
         <link rel="stylesheet" href="css/owl.carousel.css">				
-        <link rel="stylesheet" href="css/main_admin.css">
+        <link rel="stylesheet" href="css/main.css">
     </head>
     <body>	
         <header id="header">
@@ -42,6 +42,12 @@
                           </ul>			
                       </div>
                       <div class="col-lg-6 col-sm-6 col-6 header-top-right">
+                        <!--div class="header-social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-dribbble"></i></a>
+                            <a href="#"><i class="fa fa-behance"></i></a>
+                        </div-->
                       </div>
                   </div>			  					
                 </div>
@@ -56,7 +62,26 @@
                     <ul class="nav-menu">
                       <li><a href="index.html">Home</a></li>
                       <li><a href="about.html">About</a></li>
-                      <li><a href="packages.html">Packages</a></li>					          					          		          
+                      <li><a href="packages.html">Packages</a></li>
+                      <!--li><a href="hotels.html">Hotels</a></li-->
+                      <!--li><a href="insurance.html">Insurence</a></li-->
+                      <!--li class="menu-has-children"><a href="">Blog</a>
+                        <ul>
+                          <li><a href="blog-home.html">Blog Home</a></li>
+                          <li><a href="blog-single.html">Blog Single</a></li>
+                        </ul>
+                      </li-->	
+                      <!--li class="menu-has-children"><a href="">Pages</a>
+                        <ul>
+                              <li><a href="elements.html">Elements</a></li>
+                              <li class="menu-has-children"><a href="">Level 2 </a>
+                                <ul>
+                                  <li><a href="#">Item One</a></li>
+                                  <li><a href="#">Item Two</a></li>
+                                </ul>
+                              </li>					                		
+                        </ul>
+                      </li-->					          					          		          
                       <li><a href="contact.html">Contact</a></li>
                     </ul>
                   </nav><!-- #nav-menu-container -->					      		  
@@ -65,73 +90,41 @@
         </header><!-- #header -->
         
  <!-- start banner Area -->
-<section class="banner-area relative">
+ <section class="banner-area relative">
     <div class="overlay overlay-bg">
     </div>				
-    <div class="container" style="margin-top: -40px;">
-        <div class="row fullscreen align-items-admin ">
+    <div class="container">
+        <div class="row fullscreen align-items-admin justify-content-between">
             <div class="nav_bar">
                 <link href="admin.css" rel="stylesheet">
-                <ul class="nav-menu">
-                    <li>
-                        <a href="/admin-flight" id="onlink">Flights</a>
-                    </li>
-                    <li>
-                        <a href="/admin-airplane">AirPlanes</a>
-                    </li>
-                    <li>
-                        <a href="/admin-aircraft">AirCrafts</a>
-                    </li>
-                    <li>
-                        <a href="/admin-airport">Airports</a>
-                    </li>
-                    <li>
-                        <a href="/admin-flightSchedule" style="padding-bottom: 0px;">Flight<br>Schedule</a>
-                    </li>
-                </ul>
+                 <ul class="nav-menu">
+                     <li>
+                        <a href="admin.html">Flights</a>
+                     </li>
+                     <li>
+                        <a href="airplanes.html">AirPlanes</a>
+                     </li>
+                     <li>
+                        <a href="item3.html" id="onlink">Item 3</a>
+                     </li>
+                     <li>
+                        <a href="item4.html">Item 4</a>
+                     </li>
+                     <li>
+                        <a href="item5.html">Item 5</a>
+                     </li>
+                 </ul>
             </div>
-            <div class="main_container" action="" method="post" enctype="multipart/form-data">
-                <div style="float: right;" class="page-wrapper">
-                    <nav class="primary-btn">
-                        <a style="color: white;" href="/add-flight" title="Add a Flight">+ Add a Flight</a>
-                    </nav>
-                </div>
-                <% if (flights.length > 0) {%>
-                <TABLE class="table"> 
-                    <THEAD>
-                    <TR>
-                        <TH>Flight Id</TH>
-                        <TH>Origin</TH>
-                        <TH>Destination</TH>
-                        <th>Edit / Delete</th>  
-                    </TR>
-                    </THEAD>
-                    <TBODY>
-                        <% flights.forEach((flight, index) => { %>
-                            <tr>
-                                <td scope="row"><%= flight.flight_ID %></td>
-                                <td><%= flight.origin %></td>
-                                <td><%= flight.destination %></td>
-                                <td>
-                                    <a href="/edit-flight/<%- flight.flight_ID %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                    <a href="/delete/<%- flight.flight_ID %>" class="btn btn-sm btn-danger">Delete</a>
-                                </td>
-                            </tr>
-                        <% }) %>
-                    </TBODY>
-                </TABLE>
-                <% } else { %>
-                    <p class="text-center">No flights found. Go <a href="/add" >here</a> to add flights.</p>
-                <% } %>
+            <div class="main_container">
+                <p>This is index page.</p>
             </div>
         </div>
     </div>					
 </section>
-</body>
 <!-- End banner Area -->			
+
         <!-- start footer Area -->		
         <footer class="footer-area section-gap">
-            <link rel="stylesheet" href="css/main_admin.css">
             <div class="container">
 
                 <div class="row">
@@ -228,4 +221,5 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         <script src="js/owl.carousel.min.js"></script>							
         <script src="js/mail-script.js"></script>	
         <script src="js/main.js"></script>	
+    </body>
 </html>
