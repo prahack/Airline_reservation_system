@@ -14,6 +14,7 @@ module.exports = {
         let query = "select * from `flight` inner join `flight_schedule` on flight.flight_ID=flight_schedule.flight_ID where  `origin`='" + origin + "' and `destination`='" + destination + "'";
 
         db.query(query, (err, result) => {
+            console.log(result);
             if (err) {
                 return res.status(500).send(err);
             }
