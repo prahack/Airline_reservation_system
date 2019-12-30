@@ -71,7 +71,7 @@ module.exports = {
         let origin = req.body.origin;
         let destination = req.body.destination;
 
-        let query = "UPDATE `flight` SET `flight_ID` = '" + flight_ID + "', `origin` = '" + origin + "', `destination` = '" + destination + "'";
+        let query = "UPDATE `flight` SET `origin` = '" + origin + "', `destination` = '" + destination + "' WHERE `flight`.`flight_ID` = '" + flight_ID + "'";
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
