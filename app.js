@@ -6,16 +6,17 @@ const path = require('path');
 const app = express();
 const session = require('express-session');
 
-const {getHomePage} = require('./routes/index');
-const {getSignup, addPassenger, getLogin, login, logout} = require('./routes/passenger');
-const {getAdmin, addAdmin, getLoginAdmin, loginAdmin} = require('./routes/admin');
-const {getAdminFlight,addFlightPage, addFlight, editFlightPage, editFlight} = require('./routes/flight');
-const {getAdminAirplane, addAirplanePage, addAirplane} = require('./routes/airplane');
-const {getAdminAircraft, addAircraftPage, addAircraft} = require('./routes/aircraft');
-const {getAdminAirport, addAirportPage, addAirport} = require('./routes/airport');
-const {getAdminFlightSchedule, addFlightSchedulePage, addFlightSchedule} = require('./routes/flightSchedule');
+const { getHomePage } = require('./routes/index');
+const { getSignup, addPassenger, getLogin, login, logout } = require('./routes/passenger');
+const { getAdmin, addAdmin, getLoginAdmin, loginAdmin } = require('./routes/admin');
+const { getAdminFlight, addFlightPage, addFlight, editFlightPage, editFlight } = require('./routes/flight');
+const { getAdminAirplane, addAirplanePage, addAirplane } = require('./routes/airplane');
+const { getAdminAircraft, addAircraftPage, addAircraft } = require('./routes/aircraft');
+const { getAdminAirport, addAirportPage, addAirport } = require('./routes/airport');
+const { getAdminFlightSchedule, addFlightSchedulePage, addFlightSchedule } = require('./routes/flightSchedule');
 const { searchFlight, searchFlightPage } = require('./routes/searchFlight');
 const { flightBooking, flightBookingPage } = require('./routes/bookFlight');
+const { searchByFlightNoPage, searchByFlightNo, numberOFPassengers, numberOFPassengersPage } = require('./routes/adminSearch');
 const port = 5000;
 
 // create connection to database
@@ -83,6 +84,11 @@ app.get('/searchFlight', searchFlightPage);
 app.post('/searchFlight', searchFlight);
 app.get('/bookFlight', flightBookingPage);
 app.post('/bookFlight', flightBooking);
+app.get('/searchByFlightNo', searchByFlightNoPage);
+app.post('/searchByFlightNo', searchByFlightNo);
+app.get('/numberOFPassengers', numberOFPassengersPage);
+app.post('/numberOFPassengers', numberOFPassengers);
+
 
 
 
