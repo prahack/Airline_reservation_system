@@ -51,9 +51,11 @@ module.exports = {
         });
     },
     editFlightPage: (req, res) => {
-        let flight_ID = req.params.id;
-        let query = "SELECT * FROM `flight` WHERE id = '" + flight_ID + "' ";
+        let flight_ID = req.params.flight_ID;
+        console.log(flight_ID);
+        let query = "SELECT * FROM `flight` WHERE flight_ID = '" + flight_ID + "' ";
         db.query(query, (err, result) => {
+            console.log(result);
             if (err) {
                 return res.status(500).send(err);
             }
@@ -74,7 +76,7 @@ module.exports = {
             if (err) {
                 return res.status(500).send(err);
             }
-            res.redirect('/');
+            res.redirect('/admin-flight');
         });
     },
 };

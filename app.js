@@ -8,7 +8,7 @@ const app = express();
 const {getHomePage} = require('./routes/index');
 const {getSignup, addPassenger, getLogin, login} = require('./routes/passenger');
 const {getAdmin, addAdmin, getLoginAdmin, loginAdmin} = require('./routes/admin');
-const {getAdminFlight,addFlightPage, addFlight} = require('./routes/flight');
+const {getAdminFlight,addFlightPage, addFlight, editFlightPage, editFlight} = require('./routes/flight');
 const {getAdminAirplane, addAirplanePage, addAirplane} = require('./routes/airplane');
 const {getAdminAircraft, addAircraftPage, addAircraft} = require('./routes/aircraft');
 const {getAdminAirport, addAirportPage, addAirport} = require('./routes/airport');
@@ -54,6 +54,8 @@ app.post('/admin-panel',loginAdmin);
 app.get('/admin-flight', getAdminFlight);
 app.get('/add-flight', addFlightPage);
 app.post('/add-flight', addFlight);
+app.get('/edit-flight/:flight_ID', editFlightPage);
+app.post('/edit-flight/:flight_ID', editFlight);
 app.get('/admin-airplane', getAdminAirplane);
 app.get('/add-airplane', addAirplanePage)
 app.post('/add-airplane', addAirplane);
