@@ -100,5 +100,37 @@ module.exports = {
             }
         });
 
+    },
+    getbookingsByPassengerType: (req, res) => {
+        message =''
+        res.render('bookings-by-passenger-type.ejs', {
+            message
+        });
+    },
+    bookingsByPassengerType: (req, res) => {
+        let startDate = req.body.startDate;
+        let endDate = req.body.endDate;
+        let q1 = "SELECT count(`booking_ID`) from `booking` natural join `passenger` where (`booking_date` BETWEEN '" + startDate + "'AND '" + endDate + "') and type = 'Frequent'";
+        let q2 = "SELECT count(`booking_ID`) from `booking` natural join `passenger` where (`booking_date` BETWEEN '" + startDate + "'AND '" + endDate + "') and type = 'Gold'";
+        let gold;
+        let frequent;
+        db.query(q1,(err, result1) => {
+            console.log(result1);
+            frequent = result1[0]['count(`booking_ID`)'];
+
+            db.query(q2,(err, result2) => {
+                console.log(result2);
+                gold = result2[0]['count(`booking_ID`)'];
+
+                message = 'hiii'
+                res.render('search-results.ejs', {
+                    message,
+                    gold,
+                    frequent
+                });
+            });
+        });
+        
+        console.log(startDate);
     }
 };

@@ -8,7 +8,7 @@ const session = require('express-session');
 
 const {getHomePage} = require('./routes/index');
 const {getSignup, addPassenger, getLogin, login, logout} = require('./routes/passenger');
-const {getAdmin, addAdmin, getLoginAdmin, loginAdmin} = require('./routes/admin');
+const {getAdmin, addAdmin, getLoginAdmin, loginAdmin, getbookingsByPassengerType, bookingsByPassengerType} = require('./routes/admin');
 const {getAdminFlight,addFlightPage, addFlight, editFlightPage, editFlight} = require('./routes/flight');
 const {getAdminAirplane, addAirplanePage, addAirplane} = require('./routes/airplane');
 const {getAdminAircraft, addAircraftPage, addAircraft} = require('./routes/aircraft');
@@ -80,7 +80,9 @@ app.get('/admin-airport', getAdminAirport);
 app.get('/add-airport', addAirportPage)
 app.post('/add-airport', addAirport);
 app.get('/admin-flightSchedule', getAdminFlightSchedule);
-app.get('/add-flightSchedule', addFlightSchedulePage)
+app.get('/add-flightSchedule', addFlightSchedulePage);
+app.get('/bookings-passenger', getbookingsByPassengerType);
+app.post('/bookings-passenger', bookingsByPassengerType);
 app.post('/add-flightSchedule', addFlightSchedule);
 app.get('/admin-flightDelay', getAdminFlightDelay);
 app.get('/add-flightDelay', addFlightDelayPage)
