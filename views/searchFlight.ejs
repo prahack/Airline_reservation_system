@@ -1,3 +1,7 @@
+<% if (airports.length > 0) {%>
+
+<% } %>
+
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
@@ -56,14 +60,37 @@
                         <h5 style="text-align:center;margin-top:30px; padding-top: 20px;">
                             Search Flights
                         </h5>
+
                         <form class="form-wrap" action="" method="post" enctype="multipart/form-data">
-                            <input type="text" class="form-control" name="origin" placeholder="From "
-                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'From '">
-                            <input type="text" class="form-control" name="destination" placeholder="To "
-                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'To '">
+                            <% if (airports.length > 0) {%>
+
+                            <select id="origin" name="origin" class="form-control" required>
+                                <option selected disabled>From</option>
+                                <% airports.forEach((airport, index) => { %>
+
+                                <option><%= airport.name %> (<%= airport.airport_code%>)</option>
+
+                                <% }) %>
+
+                            </select>
+                            <% } %>
+
+                            <% if (airports.length > 0) {%>
+
+                            <select id="destination" name="destination" class="form-control" required>
+                                <option selected disabled>To</option>
+                                <% airports.forEach((airport, index) => { %>
+
+                                <option><%= airport.name %> (<%= airport.airport_code%>)</option>
+
+                                <% }) %>
+
+                            </select>
+                            <% } %>
 
                             <button type="submit" class="primary-btn text-uppercase">Search flights</button>
                         </form>
+
                     </div>
                 </div>
             </div>
