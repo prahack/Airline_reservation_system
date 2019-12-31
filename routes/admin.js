@@ -132,5 +132,14 @@ module.exports = {
         });
         
         console.log(startDate);
+    },
+    getDetails: (req, res) => {
+        message =''
+        res.render('details-by-origin-destination.ejs', {
+            message
+        });
+    },
+    details: (req, res) => {
+
     }
 };
