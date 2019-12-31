@@ -23,7 +23,7 @@ const { searchFlight, searchFlightPage } = require('./routes/searchFlight');
 const { flightBooking, flightBookingPage } = require('./routes/bookFlight');
 const { searchByFlightNoPage, searchByFlightNo, numberOFPassengers, numberOFPassengersPage } = require('./routes/adminSearch');
 const port = 5000;
-
+process.env.TZ = 'Asia/Colombo';
 // create connection to database
 // the mysql.createConnection function takes in a configuration object which contains host, user, password and the database name.
 const db = mysql.createConnection({

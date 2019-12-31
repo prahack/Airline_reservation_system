@@ -155,12 +155,29 @@ module.exports = {
         console.log(startDate);
     },
     getDetails: (req, res) => {
-        message =''
-        res.render('details-by-origin-destination.ejs', {
-            message
+        let query = "select name,airport_code from `airport` order by name asc";
+        db.query(query,(err, result) => {
+            message =''
+            res.render('details-by-origin-destination.ejs', {
+                message,
+                airports:result
+            });
         });
     },
     details: (req, res) => {
+        let origin = req.body.origin;
+        let destination = req.body.destination;
+        process.env.TZ = 'Asia/Colombo';
+        var datetime = new Date();
+        datetime.setTimezone('Asia/Colombo');
+        console.log(datetime);
+        console.log(datetime.toISOString().slice(0,10));
+        console.log(origin);
+        console.log(destination);
+        let q = "select * from `flight_schedule` where `date` < '"+datetime.toISOString().slice(0,10)+"' and ";
+        db.query(q,(err, result) => {
+            console.log(result);
+        });
 
     },
     logoutAdmin: (req, res) => {
