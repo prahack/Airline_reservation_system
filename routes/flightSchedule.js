@@ -19,9 +19,25 @@ module.exports = {
     },
     addFlightSchedulePage: (req, res) => {
         if (req.session.type == 'admin') {
-            res.render('add-flightSchedule.ejs', {
-                title: "Welcome to Flight Schedule | Add a new flight schedule"
-                ,message: ''
+            let airplaneQuery = "SELECT * FROM `airplane`"; 
+            let flightQuery = "SELECT * FROM `flight`";
+            db.query(airplaneQuery, (err, result) => {
+                if (err) {
+                    return res.status(500).send(err);
+                } else {
+                    db.query(flightQuery,(err,result2)=>{
+                        if (err){
+                            return res.status(500).send(err);
+                        }else{
+                            res.render('add-flightSchedule.ejs', {
+                                title: "Welcome to Flight Schedule | Add a new schedule"
+                                ,airplanes: result
+                                ,flights: result2
+                                , message: ''
+                            });
+                        }
+                    })
+                }
             });
         } else {
             res.redirect('/admin-panel');

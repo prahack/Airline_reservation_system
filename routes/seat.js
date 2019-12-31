@@ -19,9 +19,17 @@ module.exports = {
     },
     addSeatPage: (req, res) => {
         if (req.session.type == 'admin') {
-            res.render('add-seat.ejs', {
-                title: "Welcome to Airport | Add a new seat"
-                ,message: ''
+            let airplaneQuery = "SELECT * FROM `airplane`";
+            db.query(airplaneQuery, (err, result) => {
+                if (err) {
+                    return res.status(500).send(err);
+                } else {
+                    res.render('add-seat.ejs', {
+                        title: "Welcome to Seat | Add a new seat"
+                        , airplanes: result
+                        , message: ''
+                    });
+                }
             });
         } else {
             res.redirect('/admin-panel');

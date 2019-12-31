@@ -79,26 +79,26 @@
                         <p style="color: rgb(5, 19, 145); font-size: 20px;">Fill this form to add a Seat.</p><br>
                     </div>
                     <div class="form-group col-md-8">
-                        <p style="color: black; font-size: 15px;">ID of the Seat</p>
-                        <input type="text" class="form-control" name="seat_ID" id="seat_ID" placeholder="Seat ID" required>
-                    </div>
-                    <div class="form-group col-md-8">
                         <p style="color: black; font-size: 15px;">ID of the Plane</p>
-                        <input type="text" class="form-control" name="plane_ID" id="plane_ID" placeholder="Plane ID" required>
+                        <select id="plane_ID" name="plane_ID" class="form-control" required>
+                            <option selected disabled>Plane ID</option>
+                            <% airplanes.forEach((airplane, index) => { %>
+
+                            <option value="<%= airplane.plane_ID %>"><%= airplane.plane_ID %> (<%= airplane.type %>)</option>
+
+                            <% }) %>
+
+                        </select>
                     </div>
                     <div class="form-group col-md-8">
                         <p style="color: black; font-size: 15px;">Type of seat</p>
-                        <input type="text" class="form-control" name="seat_type" id="seat_type" placeholder="Seat Type" required>
-                    </div>
-                    <!--div class="form-group col-md-8">
-                        <select id="position" name="position" class="form-control" required>
-                            <option selected disabled>Choose position</option>
-                            <option>Goalkeeper</option>
-                            <option>Defender</option>
-                            <option>Midfielder</option>
-                            <option>Forward</option>
+                        <select id="seat_type" name="seat_type" class="form-control" required>
+                            <option selected disabled>Seat Type</option>
+                            <option>Platinum</option>
+                            <option>Business</option>
+                            <option>Economy</option>
                         </select>
-                    </div-->
+                    </div>
                 </div>
                 <button type="submit" class="primary-btn" style="background-color: rgba(5, 5, 216, 0.829);">Add a Seat</button>	
             </form>

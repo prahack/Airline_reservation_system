@@ -19,9 +19,17 @@ module.exports = {
     },
     addPricePage: (req, res) => {
         if (req.session.type == 'admin') {
-            res.render('add-price.ejs', {
-                title: "Welcome to Airport | Add a new price"
-                ,message: ''
+            let flightScheduleQuery = "SELECT * FROM `flight_schedule`";
+            db.query(flightScheduleQuery, (err, result) => {
+                if (err) {
+                    return res.status(500).send(err);
+                } else {
+                    res.render('add-price.ejs', {
+                        title: "Welcome to Price | Add a new price"
+                        , schedules: result
+                        , message: ''
+                    });
+                }
             });
         } else {
             res.redirect('/admin-panel');

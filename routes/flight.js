@@ -19,16 +19,14 @@ module.exports = {
     },
     addFlightPage: (req, res) => {
         if (req.session.type == 'admin') {
-            let maxID = "SELECT MAX(flight_ID) FROM `flight`";
-            let originQuery = "SELECT origin FROM `flight`";
-            db.query(maxID, (err, result) => {
-                console.log(result[0]['MAX(flight_ID)']);
+            let airportQuery = "SELECT * FROM `airport`";
+            db.query(airportQuery, (err, result) => {
                 if (err) {
                     return res.status(500).send(err);
                 } else {
                     res.render('add-flight.ejs', {
                         title: "Welcome to Flight | Add a new flight"
-                        , maximumID: result[0]['MAX(flight_ID)'] + 1
+                        , airports: result
                         , message: ''
                     });
                 }
