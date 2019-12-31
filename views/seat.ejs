@@ -86,7 +86,7 @@
                         <a href="/admin-airport">Airports</a>
                     </li>
                     <li>
-                        <a href="/admin-flightSchedule" id="onlink" style="padding-bottom: 0px;">Flight<br>Schedule</a>
+                        <a href="/admin-flightSchedule" style="padding-bottom: 0px;">Flight<br>Schedule</a>
                     </li>
                     <li>
                         <a href="/admin-flightDelay" style="padding-bottom: 0px;">Flight<br>Delay</a>
@@ -98,7 +98,7 @@
                         <a href="/admin-price">Prices</a>
                     </li>
                     <li>
-                        <a href="/admin-seat">Seats</a>
+                        <a href="/admin-seat" id="onlink">Seats</a>
                     </li>
                     <li>
                         <a href="/admin-report">Reports</a>
@@ -108,41 +108,35 @@
             <div class="main_container" action="" method="post" enctype="multipart/form-data">
                 <div style="float: right;" class="page-wrapper">
                     <nav class="primary-btn">
-                        <a style="color: white;" href="/add-flightSchedule" title="Add a Flight Schedule">+ Add a FlightSchedule</a>
+                        <a style="color: white;" href="/add-seat" title="Add a seat">+ Add a Seat</a>
                     </nav>
                 </div>
-                <% if (flightSchedules.length > 0) {%>
+                <% if (seat.length > 0) {%>
                 <TABLE class="table"> 
                     <THEAD>
                     <TR>
-                        <TH>flight Schedule ID</TH>
+                        <TH>Seat ID</TH>
                         <TH>Plane ID</TH>
-                        <TH>Flight ID</TH>
-                        <TH>Arrival Time</TH>
-                        <TH>Date</TH>
-                        <TH>Departure Time</TH>
+                        <TH>Seat Type</TH>
                         <th>Edit / Delete</th>  
                     </TR>
                     </THEAD>
                     <TBODY>
-                        <% flightSchedules.forEach((flightSchedules, index) => { %>
+                        <% seat.forEach((seat, index) => { %>
                             <tr>
-                                <td scope="row"><%= flightSchedules.flight_schedule_ID %></td>
-                                <td><%= flightSchedules.plane_ID %></td>
-                                <td><%= flightSchedules.flight_ID %></td>
-                                <td><%= flightSchedules.arrival_time %></td>
-                                <td><%= flightSchedules.date %></td>
-                                <td><%= flightSchedules.departure_time %></td>
+                                <td scope="row"><%= seat.seat_ID %></td>
+                                <td><%= seat.plane_ID %></td>
+                                <td><%= seat.seat_type %></td>
                                 <td>
-                                    <a href="/edit/<%= flightSchedules.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                    <a href="/delete/<%= flightSchedules.id %>" class="btn btn-sm btn-danger">Delete</a>
+                                    <a href="/edit/<%= seat.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
+                                    <a href="/delete/<%= seat.id %>" class="btn btn-sm btn-danger">Delete</a>
                                 </td>
                             </tr>
                         <% }) %>
                     </TBODY>
                 </TABLE>
                 <% } else { %>
-                    <p class="text-center" style="color: black;">No flight Schedules found. Go <a href="/add-flightSchedule" >here</a> to add flight Schedules.</p>
+                    <p class="text-center" style="color: black;">No seats found. Go <a href="/add-seat" >here</a> to add seats.</p>
                 <% } %>
             </div>
         </div>

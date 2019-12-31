@@ -979,19 +979,31 @@ $black			: #222;
   }
   
   .genric-btn {
+    background-color: rgba(24, 151, 8, 0.808);
+    margin-top: 0px;
+    margin-bottom: 10px;
+    height: 40px;
+    width: 800px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 10px;
+    border-width: 0px;
+    color: #fff;
     display: inline-block;
-    outline: none;
-    line-height: 40px;
-    padding: 0 30px;
-    font-size: .8em;
-    text-align: center;
-    text-decoration: none;
+    font-size: 14px;
     font-weight: 500;
-    cursor: pointer;
     -webkit-transition: all 0.3s ease 0s;
     -moz-transition: all 0.3s ease 0s;
     -o-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+    margin-top: 10px;
+  }
+  .genric-btn:hover{
+    background-color: #fff;
+    color: rgba(24, 151, 8, 0.808);
   }
   
   .genric-btn:focus {
