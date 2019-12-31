@@ -1,6 +1,7 @@
 module.exports = {
     getAdminFlightDelay: (req, res) => {
-        let query = "SELECT * FROM `flight_delay`"; // query database to get all the flight delays
+        if (req.session.type == 'admin') {
+            let query = "SELECT * FROM `flight_delay`"; // query database to get all the flight delays
         // execute query
         db.query(query, (err, result) => {
             if (err) {
@@ -11,15 +12,25 @@ module.exports = {
                 ,flightDelay: result
             });
         });
+        } else {
+            res.redirect('/admin-panel');
+        }
+        
     },
     addFlightDelayPage: (req, res) => {
-        res.render('add-flightDelay.ejs', {
-            title: "Welcome to Flight Delay | Add a new flight delay"
-            ,message: ''
-        });
+        if (req.session.type == 'admin') {
+            res.render('add-flightDelay.ejs', {
+                title: "Welcome to Flight Delay | Add a new flight delay"
+                ,message: ''
+            });
+        } else {
+            res.redirect('/admin-panel');
+        }
+        
     },
     addFlightDelay: (req, res) => {
-        let message = '';
+        if (req.session.type == 'admin') {
+            let message = '';
         let flight_schedule_ID = req.body.flight_schedule_ID;
         let delayed_time = req.body.delayed_time;
         let reason = req.body.reason;
@@ -40,9 +51,14 @@ module.exports = {
             });
             }
         });
+        } else {
+            res.redirect('/admin-panel');
+        }
+        
     },
     editFlightPage: (req, res) => {
-        let flight_ID = req.params.id;
+        if (req.session.type == 'admin') {
+            let flight_ID = req.params.id;
         let query = "SELECT * FROM `flight` WHERE id = '" + flight_ID + "' ";
         db.query(query, (err, result) => {
             if (err) {
@@ -54,9 +70,14 @@ module.exports = {
                 ,message: ''
             });
         });
+        } else {
+            res.redirect('/admin-panel');
+        }
+        
     },
     editFlight: (req, res) => {
-        let flight_ID = req.params.flight_ID;
+        if (req.session.type == 'admin') {
+            let flight_ID = req.params.flight_ID;
         let origin = req.body.origin;
         let destination = req.body.destination;
 
@@ -67,5 +88,9 @@ module.exports = {
             }
             res.redirect('/');
         });
+        } else {
+            res.redirect('/admin-panel');
+        }
+        
     },
 };

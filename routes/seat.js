@@ -1,6 +1,7 @@
 module.exports = {
     getAdminSeat: (req, res) => {
-        let query = "SELECT * FROM `seat`"; // query database to get all the seats
+        if (req.session.type == 'admin') {
+            let query = "SELECT * FROM `seat`"; // query database to get all the seats
         // execute query
         db.query(query, (err, result) => {
             if (err) {
@@ -11,15 +12,25 @@ module.exports = {
                 ,seat: result
             });
         });
+        } else {
+            res.redirect('/admin-panel');
+        }
+        
     },
     addSeatPage: (req, res) => {
-        res.render('add-seat.ejs', {
-            title: "Welcome to Airport | Add a new seat"
-            ,message: ''
-        });
+        if (req.session.type == 'admin') {
+            res.render('add-seat.ejs', {
+                title: "Welcome to Airport | Add a new seat"
+                ,message: ''
+            });
+        } else {
+            res.redirect('/admin-panel');
+        }
+        
     },
     addSeat: (req, res) => {
-        let message = '';
+        if (req.session.type == 'admin') {
+            let message = '';
         let seat_ID = req.body.seat_ID;
         let plane_ID = req.body.plane_ID;
         let seat_type = req.body.seat_type;
@@ -40,9 +51,14 @@ module.exports = {
             });
             }
         });
+        } else {
+            res.redirect('/admin-panel');
+        }
+        
     },
     editFlightPage: (req, res) => {
-        let flight_ID = req.params.id;
+        if (req.session.type == 'admin') {
+            let flight_ID = req.params.id;
         let query = "SELECT * FROM `flight` WHERE id = '" + flight_ID + "' ";
         db.query(query, (err, result) => {
             if (err) {
@@ -54,9 +70,14 @@ module.exports = {
                 ,message: ''
             });
         });
+        } else {
+            res.redirect('/admin-panel');
+        }
+        
     },
     editFlight: (req, res) => {
-        let flight_ID = req.params.flight_ID;
+        if (req.session.type == 'admin') {
+            let flight_ID = req.params.flight_ID;
         let origin = req.body.origin;
         let destination = req.body.destination;
 
@@ -67,5 +88,9 @@ module.exports = {
             }
             res.redirect('/');
         });
+        } else {
+            res.redirect('/admin-panel');
+        }
+        
     },
 };
