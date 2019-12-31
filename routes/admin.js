@@ -1,3 +1,5 @@
+const fs = require('fs');
+var md5 = require('md5');
 module.exports = {
     getAdmin: (req, res) => {
         let query = "SELECT * FROM `admin`"; // query database to get all the flights
@@ -89,9 +91,12 @@ module.exports = {
             } else {
                 console.log(result[0]);
                 let pw = result[0]['password'];
+                console.log(md5(password));
                 if (pw == md5(password)) {
-                    res.redirect('/');
+                    req.session.type = 'admin';
+                    res.redirect('/admin-flight');
                 } else {
+                    console.log('in');
                     message = 'incorrect username or password';
                     res.render('admin.ejs', {
                         message,
