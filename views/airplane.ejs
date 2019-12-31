@@ -120,18 +120,13 @@
                     <TR>
                         <TH>Plane Id</TH>
                         <TH>Type</TH>
-                        <th>Edit / Delete</th>  
                     </TR>
                     </THEAD>
                     <TBODY>
                         <% airplanes.forEach((airplanes, index) => { %>
                             <tr>
-                                <td scope="row" style="width:400px;"><%= airplanes.plane_ID %></td>
-                                <td style="width:400px;"><%= airplanes.type %></td>
-                                <td style="width:400px;">
-                                    <a href="/edit/<%= airplanes.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                    <a href="/delete/<%= airplanes.id %>" class="btn btn-sm btn-danger">Delete</a>
-                                </td>
+                                <td scope="row" style="width:600px;"><%= airplanes.plane_ID %></td>
+                                <td style="width:600px;"><%= airplanes.type %></td>
                             </tr>
                         <% }) %>
                     </TBODY>

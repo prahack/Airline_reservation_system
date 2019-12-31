@@ -121,19 +121,14 @@
                         <TH>AirPort Code</TH>
                         <TH>Name</TH>
                         <TH>Location ID</TH>
-                        <th>Edit / Delete</th>  
                     </TR>
                     </THEAD>
                     <TBODY>
                         <% airports.forEach((airports, index) => { %>
                             <tr>
-                                <td scope="row"><%= airports.airport_code %></td>
-                                <td><%= airports.name %></td>
-                                <td><%= airports.location_ID %></td>
-                                <td>
-                                    <a href="/edit/<%= airports.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                    <a href="/delete/<%= airports.id %>" class="btn btn-sm btn-danger">Delete</a>
-                                </td>
+                                <td style="width:400px;" scope="row"><%= airports.airport_code %></td>
+                                <td style="width:400px;" ><%= airports.name %></td>
+                                <td style="width:400px;" ><%= airports.location_ID %></td>
                             </tr>
                         <% }) %>
                     </TBODY>
