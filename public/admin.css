@@ -25,13 +25,14 @@ body{
 .nav_bar ul li a{
     text-decoration: none;
     color: #000000;
-    font-size: 20px;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
     background:rgba(6, 56, 192, 0.562);
     border: 1px solid #000000;
     border-bottom: none;
     padding: 20px 20px 20px 20px;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
     -moz-border-radius-topleft: 10px;
     -moz-border-radius-topright: 10px;
     width: 110px;
