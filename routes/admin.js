@@ -122,6 +122,8 @@ module.exports = {
         let endDate = req.body.endDate;
         let q1 = "SELECT count(`booking_ID`) from `booking` natural join `passenger` where (`booking_date` BETWEEN '" + startDate + "'AND '" + endDate + "') and type = 'Frequent'";
         let q2 = "SELECT count(`booking_ID`) from `booking` natural join `passenger` where (`booking_date` BETWEEN '" + startDate + "'AND '" + endDate + "') and type = 'Gold'";
+        let q3 = "SELECT count(`booking_ID`) from `booking` natural join `passenger` where (`booking_date` BETWEEN '" + startDate + "'AND '" + endDate + "') and type = 'Guest'";
+
         let gold;
         let frequent;
         db.query(q1,(err, result1) => {
@@ -131,13 +133,22 @@ module.exports = {
             db.query(q2,(err, result2) => {
                 console.log(result2);
                 gold = result2[0]['count(`booking_ID`)'];
+                db.query(q3,(err, result3) => {
+                    console.log(result3);
+                    guest = result3[0]['count(`booking_ID`)'];
 
-                message = 'hiii'
-                res.render('search-results.ejs', {
-                    message,
-                    gold,
-                    frequent
+                    message = 'hiii'
+                    res.render('search-results.ejs', {
+                        message,
+                        startDate,
+                        endDate,
+                        gold,
+                        frequent,
+                        guest
+                    });
+
                 });
+                
             });
         });
         
