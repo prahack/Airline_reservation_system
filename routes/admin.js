@@ -68,9 +68,14 @@ module.exports = {
     },
     getLoginAdmin: (req, res) => {
         message =''
-        res.render('admin.ejs', {
-            message
-        });
+        if (req.session.type == undefined) {
+            res.render('admin.ejs', {
+                message
+            });
+        } else {
+            res.redirect('/admin-flight');
+        }
+        
     },
     loginAdmin: (req, res) => {
         let username = req.body.username;
@@ -146,5 +151,9 @@ module.exports = {
     },
     details: (req, res) => {
 
+    },
+    logoutAdmin: (req, res) => {
+        req.session.destroy();
+        res.redirect('/admin-panel');
     }
 };

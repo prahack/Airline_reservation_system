@@ -8,7 +8,7 @@ const session = require('express-session');
 
 const { getHomePage } = require('./routes/index');
 const { getSignup, addPassenger, getLogin, login, logout } = require('./routes/passenger');
-const { getAdmin, addAdmin, getLoginAdmin, loginAdmin, getbookingsByPassengerType, bookingsByPassengerType, getDetails, details } = require('./routes/admin');
+const { getAdmin, addAdmin, getLoginAdmin, loginAdmin, getbookingsByPassengerType, bookingsByPassengerType, getDetails, details, logoutAdmin } = require('./routes/admin');
 const { getAdminFlight, addFlightPage, addFlight, editFlightPage, editFlight } = require('./routes/flight');
 const { getAdminAirplane, addAirplanePage, addAirplane } = require('./routes/airplane');
 const { getAdminAircraft, addAircraftPage, addAircraft } = require('./routes/aircraft');
@@ -64,6 +64,7 @@ app.get('/login', getLogin);
 app.get('/logout', logout);
 // app.get('/admin-panel', getAdmin);
 // app.post('/admin-panel', addAdmin);
+app.get('/admin-logout', logoutAdmin);
 app.get('/admin-panel', getLoginAdmin);
 app.post('/admin-panel', loginAdmin);
 app.get('/admin-flight', getAdminFlight);
