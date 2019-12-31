@@ -9,12 +9,12 @@ const session = require('express-session');
 const { getHomePage } = require('./routes/index');
 const { getSignup, addPassenger, getLogin, login, logout } = require('./routes/passenger');
 const { getAdmin, addAdmin, getLoginAdmin, loginAdmin, getbookingsByPassengerType, bookingsByPassengerType, getDetails, details, logoutAdmin } = require('./routes/admin');
-const { getAdminFlight, addFlightPage, addFlight, editFlightPage, editFlight } = require('./routes/flight');
+const { getAdminFlight, addFlightPage, addFlight} = require('./routes/flight');
 const { getAdminAirplane, addAirplanePage, addAirplane } = require('./routes/airplane');
 const { getAdminAircraft, addAircraftPage, addAircraft } = require('./routes/aircraft');
 const { getAdminAirport, addAirportPage, addAirport } = require('./routes/airport');
-const { getAdminFlightSchedule, addFlightSchedulePage, addFlightSchedule } = require('./routes/flightSchedule');
-const { getAdminFlightDelay, addFlightDelayPage, addFlightDelay } = require('./routes/flightDelay');
+const { getAdminFlightSchedule, addFlightSchedulePage, addFlightSchedule} = require('./routes/flightSchedule');
+const { getAdminFlightDelay, addFlightDelayPage, addFlightDelay, editFlightDelayPage, editFlightDelay } = require('./routes/flightDelay');
 const { getAdminLocation, addLocationPage, addLocation } = require('./routes/location');
 const { getAdminPrice, addPricePage, addPrice } = require('./routes/price');
 const { getAdminSeat, addSeatPage, addSeat } = require('./routes/seat');
@@ -70,8 +70,6 @@ app.post('/admin-panel', loginAdmin);
 app.get('/admin-flight', getAdminFlight);
 app.get('/add-flight', addFlightPage);
 app.post('/add-flight', addFlight);
-app.get('/edit-flight/:flight_ID', editFlightPage);
-app.post('/edit-flight/:flight_ID', editFlight);
 app.get('/admin-airplane', getAdminAirplane);
 app.get('/add-airplane', addAirplanePage)
 app.post('/add-airplane', addAirplane);
@@ -91,6 +89,8 @@ app.post('/add-flightSchedule', addFlightSchedule);
 app.get('/admin-flightDelay', getAdminFlightDelay);
 app.get('/add-flightDelay', addFlightDelayPage)
 app.post('/add-flightdelay', addFlightDelay);
+app.get('/edit-flightDelay/:delay_ID', editFlightDelayPage);
+app.post('/edit-flightDelay/:delay_ID', editFlightDelay);
 app.get('/admin-location', getAdminLocation);
 app.get('/add-location', addLocationPage)
 app.post('/add-location', addLocation);
