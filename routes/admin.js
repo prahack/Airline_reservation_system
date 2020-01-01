@@ -184,7 +184,7 @@ module.exports = {
                     if (err) {
                         return res.status(500).send(err);
                     } else {
-                        console.log(result);
+                        console.log(result1);
                         res.render('getDetails.ejs', {
                             flights: result,
                             details: result1,

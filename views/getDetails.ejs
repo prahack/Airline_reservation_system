@@ -56,7 +56,7 @@
             <div class="row align-items-center justify-content-between d-flex">
                 <div id="logo">
                     <!--a href="index.html"><img src="img/logo.png" alt="" title="" /></a-->
-                    <h3 style="color: white;">Airline Reservation System | Admin Panel | Total Revenue</h2>
+                    <h3 style="color: white;">Airline Reservation System | Admin Panel | flight Details</h2>
                 </div>
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">
@@ -106,7 +106,7 @@
                             <% }) %>
                         </TBODY>
                     </TABLE>
-                    <% } %>
+
                     <% if (details.length > 0) {%>
                     <TABLE class="table">
                         <TR>
@@ -120,8 +120,10 @@
 
                     </TABLE>
                     <% }  %>
+                    <% } %>
 
-                    <p class="text-center" style="color: black;">No revenues for this aircraft. </p>
+                    <p class="text-center" style="color: black;">No flight details from <%= origin %> _to_
+                        <%= destination%></p>
 
                 </div>
             </div>
