@@ -19,14 +19,22 @@ module.exports = {
     },
     addFlightDelayPage: (req, res) => {
         if (req.session.type == 'admin') {
-            res.render('add-flightDelay.ejs', {
-                title: "Welcome to Flight Delay | Add a new flight delay"
-                ,message: ''
+            let flightScheduleQuery = "SELECT * FROM `flight_schedule`";
+            db.query(flightScheduleQuery, (err, result) => {
+                if (err) {
+                    return res.status(500).send(err);
+                } else {
+                    res.render('add-flightDelay.ejs', {
+                        title: "Welcome to Flight Delay | Add a new flight delay"
+                        , schedules: result
+                        , message: ''
+                    });
+                }
             });
         } else {
             res.redirect('/admin-panel');
         }
-        
+
     },
     addFlightDelay: (req, res) => {
         if (req.session.type == 'admin') {
