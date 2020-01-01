@@ -26,7 +26,7 @@ module.exports = {
                     }
                     else {
                         let seatQuery = "select seat_ID from `seat` where plane_ID = '" + plane_id + "'";
-                        let seatQuery2 = "select seat_ID from `booking` where flight_ID = '" + flight_id + "'";
+                        let seatQuery2 = "select seat_ID from `booking` where flight_schedule_ID = '" + flight_id + "'";
 
                         db.query(seatQuery,(err, result2) => {
                             if (err) {
@@ -37,13 +37,26 @@ module.exports = {
                                     if (err) {
                                         return res.status(500).send(err);
                                     } else {
+                                        y = [];
+                                        for (x of result2) {
+                                            y.push(x['seat_ID']);
+                                        }
+                                        z = [];
+                                        for (x of result3) {
+                                            z.push(x['seat_ID']);
+                                        }
+                                       
                                         console.log(result3);
+                                        console.log(result2.length);
+                                        var seats = y.filter(function(obj) { return z.indexOf(obj) == -1; });
+                                        console.log(seats);
                                         res.render('add-booking.ejs', {
                                             title: 'Welcome to airline_reservation_system | Add a new booking',
                                             flight_schedule: result[0], 
                                             id,
                                             email,
-                                            user
+                                            user,
+                                            seats
                                         });
                                     }
                                 });
@@ -64,9 +77,10 @@ module.exports = {
         let age = req.body.age;
         let email = req.body.email;
         let seat_ID = req.body.seat_ID;
-        let flight_ID = req.params.id;
-        let booking_date = req.body.booking_date;
-        let bookingQuery = "SELECT * FROM `booking` WHERE flight_ID = '" + flight_ID + "' AND seat_ID = '" + seat_ID + "'";
+        let flight_schedule_ID = req.params.id;
+        let passenger_ID = req.body.passenger_id;
+        let booking_date = req.body.date;
+        let bookingQuery = "SELECT * FROM `booking` WHERE flight_schedule_ID = '" + flight_schedule_ID + "' AND seat_ID = '" + seat_ID + "'";
 
         db.query(bookingQuery, (err, result) => {
             console.log(result);
@@ -83,7 +97,7 @@ module.exports = {
             } else {
                 console.log('else');
                  // send the booking's details to the database
-                let query = "INSERT INTO `booking` (passenger_ID, seat_ID, flight_ID, booking_date) VALUES ('" + passenger_ID + "', '" + seat_ID + "', '" + flight_ID + "', '" + booking_date + "')";
+                let query = "INSERT INTO `booking` (passenger_ID, seat_ID, flight_schedule_ID, booking_date) VALUES ('" + passenger_ID + "', '" + seat_ID + "', '" + flight_schedule_ID + "', '" + booking_date + "')";
                 db.query(query, (err, result) => {
                     console.log(result);
                     if (err) {

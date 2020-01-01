@@ -46,7 +46,7 @@ db.connect((err) => {
 });
 global.db = db;
 
-let dropTrigger1 = "DROP TRIGGER ageCheck;"
+let dropTrigger1 = "DROP TRIGGER if exists ageCheck;"
 
 let sqlTrigger1 = "create trigger ageCheck before insert on `passenger` for each row if new.age < 0 then set new.age = 0 ; end if;"
 db.query(dropTrigger1,(err,result1) => {
