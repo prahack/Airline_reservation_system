@@ -82,7 +82,7 @@ module.exports = {
         let delayed_time = req.body.delayed_time;
         let reason = req.body.reason;
 
-        let query = "UPDATE `flight_delay` SET `delayed_ID` = '" + delay_ID + "', `flight_schedule_ID` = '" + flight_schedule_ID + "', `delayed_time` = '" + delayed_time + "', `reason` = '" + reason + "'";
+        let query = "UPDATE `flight_delay` SET `flight_schedule_ID` = '" + flight_schedule_ID + "', `delayed_time` = '" + delayed_time + "', `reason` = '" + reason +"' WHERE `flight_delay`.`delay_ID` = '" + delay_ID + "'";
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
