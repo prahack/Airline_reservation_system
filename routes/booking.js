@@ -120,11 +120,25 @@ module.exports = {
                 });
             } else {
                 if (req.session.email == undefined) {
+                    let start="start transaction";
+                    db.query(start,(err,result) => {
+                        if (err) {
+                            let rollBk = "rollback";
+                            db.query(rollBk,(err, result) => {
+                                console.log(err);
+                            });
+                            return res.status(500).send(err);
+                        }
+                    });
                     //let insertGP = "insert into `passenger` (name, age, email, type, number_of_times) VALUES('"+ name +"','"+ age +"','"+ email +"','Guest',1)";
                     let insertGP = "insert into `passenger` (name, age, email, type, number_of_times) VALUES(?,?,?,'Guest',1)";
                     db. query(insertGP,[name, age, email],(err, result) => {
                         console.log(result);
                          if (err) {
+                            let rollBk = "rollback";
+                            db.query(rollBk,(err, result) => {
+                                console.log(err);
+                            });
                              return res.status(500).send(err);
                          } else {
                              console.log(result['insertId']);
@@ -133,6 +147,10 @@ module.exports = {
                              let query = "INSERT INTO `booking` (passenger_ID, seat_ID, flight_schedule_ID, booking_date) VALUES (?, ?, ?, ?)";
                              db.query(query,[pasID, seat_ID, flight_schedule_ID, booking_date],(err, result1) => {
                                 if (err) {
+                                    let rollBk = "rollback";
+                                    db.query(rollBk,(err, result) => {
+                                        console.log(err);
+                                    });
                                     return res.status(500).send(err);
                                 } else {
                                     console.log(result1['insertId']);
@@ -141,8 +159,18 @@ module.exports = {
                                     let ticket = "insert into `ticket` (booking_ID) values (?)";
                                     db.query(ticket,[bID], (err, result2) =>{
                                         if (err) {
+                                            let rollBk = "rollback";
+                                            db.query(rollBk,(err, result) => {
+                                                console.log(err);
+                                            });
                                             return res.status(500).send(err);
                                         }
+                                        let commit = "commit";
+                                        db.query(commit, (err,result) => {
+                                            if (err) {
+                                                console.log(err);
+                                            }
+                                        });
                                         res.redirect('/');
                                     });
                                 }
@@ -166,9 +194,14 @@ module.exports = {
                                 if (err) {
                                     return res.status(500).send(err);
                                 } else {
-
+                                    let queryUpdatePassenger = "update `passenger` set number_of_times = number_of_times + 1 where passenger_ID = ?";
+                                    db.query(queryUpdatePassenger,[passenger_ID],(err, result3) => {
+                                        if (err) {
+                                            return res.status(500).send(err);
+                                        }
+                                        res.redirect('/');
+                                    });
                                 }
-                                res.redirect('/');
                             });
                          }
                      });

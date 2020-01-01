@@ -55,40 +55,4 @@ module.exports = {
         }
         
     },
-    editAircraftPage: (req, res) => {
-        if (req.session.type  == 'admin') {
-            let type = req.params.type;
-            let query = "SELECT * FROM `aircraft` WHERE type = '" + type + "' ";
-            db.query(query, (err, result) => {
-                if (err) {
-                    return res.status(500).send(err);
-                }
-                res.render('edit-aircraft.ejs', {
-                    title: "Edit  Flight"
-                    ,flight: result[0]
-                    ,message: ''
-                });
-            });
-        } else {
-            res.redirect('/admin-panel');
-        }
-        
-    },
-    editFlight: (req, res) => {
-        if (req.session.type  == 'admin') {
-            let flight_ID = req.params.flight_ID;
-            let origin = req.body.origin;
-            let destination = req.body.destination;
-
-            let query = "UPDATE `flight` SET `flight_ID` = '" + flight_ID + "', `origin` = '" + origin + "', `destination` = '" + destination + "'";
-            db.query(query, (err, result) => {
-                if (err) {
-                    return res.status(500).send(err);
-                }
-                res.redirect('/');
-            });
-        } else {
-            res.redirect('/admin-panel');
-        }
-    },
 };

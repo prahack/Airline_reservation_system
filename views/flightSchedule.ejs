@@ -57,10 +57,6 @@
                   </div>
                   <nav id="nav-menu-container">
                     <ul class="nav-menu">
-                      <li><a href="index.html">Home</a></li>
-                      <li><a href="about.html">About</a></li>
-                      <li><a href="packages.html">Packages</a></li>					          					          		          
-                      <li><a href="contact.html">Contact</a></li>
                     </ul>
                   </nav><!-- #nav-menu-container -->					      		  
                 </div>
@@ -121,13 +117,12 @@
                 <TABLE class="table"> 
                     <THEAD>
                     <TR>
-                        <TH style="width: 150px;">flight Schedule ID</TH>
-                        <TH style="width: 150px;">Plane ID</TH>
-                        <TH style="width: 130px;">Flight ID</TH>
+                        <TH>flight Schedule ID</TH>
+                        <TH>Plane ID</TH>
+                        <TH>Flight ID</TH>
                         <TH>Arrival Time</TH>
                         <TH>Date</TH>
                         <TH>Departure Time</TH>
-                        <th>Edit / Delete</th>  
                     </TR>
                     </THEAD>
                     <TBODY>
@@ -139,10 +134,6 @@
                                 <td style="width: 300px;"><%= flightSchedules.arrival_time %></td>
                                 <td style="width: 300px;"><%= flightSchedules.date %></td>
                                 <td><%= flightSchedules.departure_time %></td>
-                                <td>
-                                    <a href="/edit/<%= flightSchedules.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                    <a href="/delete/<%= flightSchedules.id %>" class="btn btn-sm btn-danger">Delete</a>
-                                </td>
                             </tr>
                         <% }) %>
                     </TBODY>

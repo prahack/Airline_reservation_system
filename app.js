@@ -7,6 +7,8 @@ const app = express();
 const session = require('express-session');
 
 const { getHomePage } = require('./routes/index');
+const { getAboutPage } = require('./routes/about');
+const { getContactPage } = require('./routes/contact');
 const { getSignup, addPassenger, getLogin, login, logout } = require('./routes/passenger');
 const { getAdmin, addAdmin, getLoginAdmin, loginAdmin, getbookingsByPassengerType, bookingsByPassengerType, getDetails, details, logoutAdmin } = require('./routes/admin');
 const { getAdminFlight, addFlightPage, addFlight} = require('./routes/flight');
@@ -95,6 +97,8 @@ app.use(session({
 // routes for the app
 
 app.get('/', getHomePage);
+app.get ('/about',getAboutPage);
+app.get ('/contact',getContactPage);
 app.get('/signup', getSignup);
 app.get('/login', getLogin);
 app.get('/logout', logout);
