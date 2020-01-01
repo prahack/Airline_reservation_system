@@ -21,7 +21,7 @@ const { getAdminSeat, addSeatPage, addSeat } = require('./routes/seat');
 const { getAdminReport } = require('./routes/report');
 const { searchFlight, searchFlightPage } = require('./routes/searchFlight');
 const { flightBooking, flightBookingPage } = require('./routes/bookFlight');
-const { searchByFlightNoPage, searchByFlightNo, numberOFPassengers, numberOFPassengersPage } = require('./routes/adminSearch');
+const { searchByFlightNoPage, searchByFlightNo, numberOFPassengers, numberOFPassengersPage, totalRevenuePage, totalRevenue } = require('./routes/adminSearch');
 const port = 5000;
 
 // create connection to database
@@ -111,6 +111,9 @@ app.get('/searchByFlightNo', searchByFlightNoPage);
 app.post('/searchByFlightNo', searchByFlightNo);
 app.get('/numberOFPassengers', numberOFPassengersPage);
 app.post('/numberOFPassengers', numberOFPassengers);
+app.get('/totalRevenue', totalRevenuePage);
+app.post('/totalRevenue', totalRevenue);
+
 
 
 

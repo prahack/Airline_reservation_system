@@ -2,7 +2,7 @@ module.exports = {
 
 
     searchByFlightNoPage: (req, res) => {
-        let query = "select distinct flight_ID from `booking` order by flight_ID asc";
+        let query = "select distinct flight_ID from `booking` natural join flight_schedule order by flight_schedule_ID asc";
 
         db.query(query, (err, result) => {
             if (err) {
@@ -60,7 +60,8 @@ module.exports = {
         let start_date = req.body.start_date;
         let end_date = req.body.end_date;
 
-        let query = "select count(passenger_ID) as count from booking natural join flight where destination='" + destination + "' and booking_date between '" + start_date + "' and '" + end_date + "'";
+        //let query = "select count(passenger_ID) as count from booking natural join flight where destination='" + destination + "' and booking_date between '" + start_date + "' and '" + end_date + "'";
+        let query = "select count(passenger_ID) as count from booking natural join flight_schedule where flight_ID in (select flight_ID from flight where destination='" + destination + "') and date between '" + start_date + "' and '" + end_date + "'";
 
         db.query(query, (err, result) => {
             if (err) {
@@ -78,6 +79,64 @@ module.exports = {
                 });
             }
         });
+    },
+
+    totalRevenuePage: (req, res) => {
+
+        let query = "select  type from aircraft ";
+
+        db.query(query, (err, result) => {
+
+            if (err) {
+                return res.status(500).send(err);
+            }
+            else {
+                res.render('serchByType.ejs', {
+                    types: result
+                });
+            }
+        });
+
+
+
+
+
+    },
+
+
+    totalRevenue: (req, res) => {
+        let type = req.body.type;
+        var query;
+        if (type == "Boeing 757") {
+            query = "call c()";
+        }
+        if (type == "Airbus A38") {
+            query = "call a()";
+        }
+
+        if (type == "Boeing 737") {
+            query = "call b()";
+        }
+
+
+        db.query(query, (err, result) => {
+
+            if (err) {
+                return res.status(500).send(err);
+            }
+            else {
+                console.log(result[0]);
+                res.render('totalRevenueResult.ejs', {
+                    revenues: result,
+                    type: type
+                });
+            }
+        });
+
+
+
+
+
     },
 
 
