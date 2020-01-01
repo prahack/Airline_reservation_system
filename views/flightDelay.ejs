@@ -104,6 +104,9 @@
                         <a href="/admin-seat">Seats</a>
                     </li>
                     <li>
+                        <a href="/admin-viewbookings">Bookings</a>
+                    </li>
+                    <li>
                         <a href="/admin-report">Reports</a>
                     </li>
                 </ul>
@@ -133,8 +136,8 @@
                                 <td><%= flightDelay.delayed_time %></td>
                                 <td><%= flightDelay.reason %></td>
                                 <td>
-                                    <a href="/edit/<%= flightDelay.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                    <a href="/delete/<%= flightDelay.id %>" class="btn btn-sm btn-danger">Delete</a>
+                                    <a href="/edit-flightDelay/<%- flightDelay.delay_ID %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
+                                    <a href="/delete-flightDelay/<%- flightDelay.delay_ID %>" class="btn btn-sm btn-danger">Delete</a>
                                 </td>
                             </tr>
                         <% }) %>

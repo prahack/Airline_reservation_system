@@ -19,9 +19,17 @@ module.exports = {
     },
     addPricePage: (req, res) => {
         if (req.session.type == 'admin') {
-            res.render('add-price.ejs', {
-                title: "Welcome to Airport | Add a new price"
-                ,message: ''
+            let flightScheduleQuery = "SELECT * FROM `flight_schedule`";
+            db.query(flightScheduleQuery, (err, result) => {
+                if (err) {
+                    return res.status(500).send(err);
+                } else {
+                    res.render('add-price.ejs', {
+                        title: "Welcome to Price | Add a new price"
+                        , schedules: result
+                        , message: ''
+                    });
+                }
             });
         } else {
             res.redirect('/admin-panel');
@@ -57,41 +65,62 @@ module.exports = {
         }
         
     },
-    editFlightPage: (req, res) => {
+    editPricePage: (req, res) => {
         if (req.session.type == 'admin') {
-            let flight_ID = req.params.id;
-            let query = "SELECT * FROM `flight` WHERE id = '" + flight_ID + "' ";
-            db.query(query, (err, result) => {
-                if (err) {
-                    return res.status(500).send(err);
-                }
-                res.render('edit-flight.ejs', {
-                    title: "Edit  Flight"
-                    ,flight: result[0]
-                    ,message: ''
-                });
+            let flight_schedule_ID = req.params.flight_schedule_ID;
+        let query = "SELECT * FROM `price` WHERE flight_schedule_ID = '" + flight_schedule_ID + "' ";
+        db.query(query, (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            res.render('edit-price.ejs', {
+                title: "Edit  Price"
+                ,price: result[0]
+                ,message: ''
             });
+        });
         } else {
             res.redirect('/admin-panel');
         }
         
     },
-    editFlight: (req, res) => {
+    editPrice: (req, res) => {
         if (req.session.type == 'admin') {
-            let flight_ID = req.params.flight_ID;
-            let origin = req.body.origin;
-            let destination = req.body.destination;
-    
-            let query = "UPDATE `flight` SET `flight_ID` = '" + flight_ID + "', `origin` = '" + origin + "', `destination` = '" + destination + "'";
-            db.query(query, (err, result) => {
-                if (err) {
-                    return res.status(500).send(err);
-                }
-                res.redirect('/');
-            });
+        let flight_schedule_ID = req.params.flight_schedule_ID;
+        let economy_price = req.body.economy_price;
+        let business_price = req.body.business_price;
+        let platinum_price = req.body.platinum_price;
+
+        let query = "UPDATE `price` SET `economy_price` = '" + economy_price + "', `business_price` = '" + business_price +"', `platinum_price` = '" + platinum_price +"' WHERE `price`.`flight_schedule_ID` = '" + flight_schedule_ID + "'";
+        db.query(query, (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            res.redirect('/admin-price');
+        });
         } else {
             res.redirect('/admin-panel');
         }
         
     },
+    deletePrice: (req, res) => {
+        let flight_schedule_ID = req.params.flight_schedule_ID;
+        let economy_price = req.params.economy_price;
+        let business_price = req.params.business_price;
+        let platinum_price = req.params.platinum_price;
+        let getidQuery = 'SELECT flight_schedule_ID from `price` WHERE flight_schedule_ID = "' + flight_schedule_ID + '"';
+        let deletePriceQuery = 'DELETE FROM price WHERE flight_schedule_ID = "' + flight_schedule_ID + '"';
+
+        db.query(getidQuery, (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            db.query(deletePriceQuery, (err, result) => {
+                if (err) {
+                    return res.status(500).send(err);
+                }
+                res.redirect('/admin-price');
+            });
+        });
+    }
 };

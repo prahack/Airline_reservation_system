@@ -80,11 +80,27 @@
                     </div>
                     <div class="form-group col-md-8">
                         <p style="color: black; font-size: 15px;">Origin</p>
-                        <input style="width: 300px" type="text" class="form-control" name="origin" id="origin" placeholder="" required>
+                        <select id="origin" name="origin" class="form-control" required>
+                            <option selected disabled>From</option>
+                            <% airports.forEach((airport, index) => { %>
+
+                            <option value="<%= airport.airport_code%>"><%= airport.name %> (<%= airport.airport_code%>)</option>
+
+                            <% }) %>
+
+                        </select>
                     </div>
                     <div class="form-group col-md-8">
                         <p style="color: black; font-size: 15px;">Destination</p>
-                        <input style="width: 300px"s type="text" class="form-control" name="destination" id="destination" placeholder="" required>
+                        <select id="destination" name="destination" class="form-control" required>
+                            <option selected disabled>To</option>
+                            <% airports.forEach((airport, index) => { %>
+
+                            <option value="<%= airport.airport_code%>"><%= airport.name %> (<%= airport.airport_code%>)</option>
+
+                            <% }) %>
+
+                        </select>
                     </div>
                 </div>
                 <button type="submit" class="primary-btn" style="background-color: rgba(5, 5, 216, 0.829);">Search</button>	

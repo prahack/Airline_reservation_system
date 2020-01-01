@@ -104,6 +104,9 @@
                         <a href="/admin-seat" id="onlink">Seats</a>
                     </li>
                     <li>
+                        <a href="/admin-viewbookings">Bookings</a>
+                    </li>
+                    <li>
                         <a href="/admin-report">Reports</a>
                     </li>
                 </ul>
@@ -121,19 +124,14 @@
                         <TH>Seat ID</TH>
                         <TH>Plane ID</TH>
                         <TH>Seat Type</TH>
-                        <th>Edit / Delete</th>  
                     </TR>
                     </THEAD>
                     <TBODY>
                         <% seat.forEach((seat, index) => { %>
                             <tr>
-                                <td scope="row"><%= seat.seat_ID %></td>
-                                <td><%= seat.plane_ID %></td>
-                                <td><%= seat.seat_type %></td>
-                                <td>
-                                    <a href="/edit/<%= seat.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                    <a href="/delete/<%= seat.id %>" class="btn btn-sm btn-danger">Delete</a>
-                                </td>
+                                <td style="width:400px;" scope="row"><%= seat.seat_ID %></td>
+                                <td style="width:400px;" ><%= seat.plane_ID %></td>
+                                <td style="width:400px;" ><%= seat.seat_type %></td>
                             </tr>
                         <% }) %>
                     </TBODY>

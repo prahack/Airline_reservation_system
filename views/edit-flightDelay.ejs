@@ -37,8 +37,6 @@
                   <div class="row align-items-center">
                       <div class="col-lg-6 col-sm-6 col-6 header-top-left">
                           <ul>
-                              <li><a href="#">Visit Us</a></li>
-                              <li><a href="#">Buy Tickets</a></li>
                           </ul>			
                       </div>
                       <div class="col-lg-6 col-sm-6 col-6 header-top-right">
@@ -50,14 +48,10 @@
                 <div class="row align-items-center justify-content-between d-flex">
                   <div id="logo">
                     <!--a href="index.html"><img src="img/logo.png" alt="" title="" /></a-->
-                    <h3 style="color: white;">Airline Reservation System | Admin Panel | Add a flight</h2>
+                    <h3 style="color: white;">Airline Reservation System | Admin Panel | Update a flight Delay</h2>
                   </div>
                   <nav id="nav-menu-container">
                     <ul class="nav-menu">
-                      <li><a href="index.html">Home</a></li>
-                      <li><a href="about.html">About</a></li>
-                      <li><a href="packages.html">Packages</a></li>					          					          		          
-                      <li><a href="contact.html">Contact</a></li>
                     </ul>
                   </nav><!-- #nav-menu-container -->					      		  
                 </div>
@@ -74,26 +68,30 @@
         <p class="text-left text-danger"><%= message %></p>
     <% } %>
 
-    <% if (flight) { %>
+    <% if (flightDelay) { %>
         <form class="text-left form-wrap" action="" method="post" enctype="multipart/form-data">
             <div class="form-row">
                 <div class="form-group col-md-8">
-                    <label for="flight_ID">Flight ID</label>
-                    <input type="text" class="form-control" name="flight_ID" id="flight_ID" value="<%= flight.flight_ID %>" required disabled title="Flight ID cannot be edited.">
+                    <label for="flight_ID">Flight Delay ID</label>
+                    <input type="text" class="form-control" name="delay_ID" id="delay_ID" value="<%= flightDelay.delay_ID %>" required disabled title="Delay ID cannot be edited.">
                 </div>
                 <div class="form-group col-md-8">
-                    <label for="origin">Origin</label>
-                    <input type="text" class="form-control" name="origin" id="origin" value="<%= flight.origin %>" required>
+                    <label for="origin">Flight Schedule ID</label>
+                    <input type="text" class="form-control" name="flight_schedule_ID" id="flight_schedule_ID" value="<%= flightDelay.flight_schedule_ID %>" required>
                 </div>
                 <div class="form-group col-md-8">
-                    <label for="destination">Destination</label>
-                    <input type="text" class="form-control" name="destination" id="destination" value="<%= flight.destination %>" required>
+                    <label for="destination">Delayed Time</label>
+                    <input type="text" class="form-control" name="delayed_time" id="delayed_time" value="<%= flightDelay.delayed_time %>" required>
+                </div>
+                <div class="form-group col-md-8">
+                    <label for="destination">Reason</label>
+                    <input type="text" class="form-control" name="reason" id="reason" value="<%= flightDelay.reason %>" required>
                 </div>
             </div>
-            <button type="submit" class="primary-btn">Update Flight</button>
+            <button style="background-color: blue;" type="submit" class="primary-btn">Update Flight</button>
         </form>
     <% } else { %>
-        <p class="text-center">Flight Not Found. Go <a href="/add-flight">here</a> to add flights.</p>
+        <p class="text-center">Flight Not Found. Go <a href="/add-flightDelay">here</a> to add flight Delay.</p>
     <% } %>
 </div>
 </div>

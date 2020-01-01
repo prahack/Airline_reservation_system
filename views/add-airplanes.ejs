@@ -50,7 +50,7 @@
                 <div class="row align-items-center justify-content-between d-flex">
                   <div id="logo">
                     <!--a href="index.html"><img src="img/logo.png" alt="" title="" /></a-->
-                    <h3 style="color: white;">Airline Reservation System | Admin Panel | Add a flight</h2>
+                    <h3 style="color: white;">Airline Reservation System | Admin Panel | Add an airplane</h2>
                   </div>
                   <nav id="nav-menu-container">
                     <ul class="nav-menu">
@@ -80,17 +80,17 @@
                     </div>
                     <div class="form-group col-md-8">
                         <p style="color: black; font-size: 15px;">Type of the airplane</p>
-                        <input type="text" class="form-control" name="type" id="type" placeholder="Type" required>
-                    </div>
-                    <!--div class="form-group col-md-8">
-                        <select id="position" name="position" class="form-control" required>
-                            <option selected disabled>Choose position</option>
-                            <option>Goalkeeper</option>
-                            <option>Defender</option>
-                            <option>Midfielder</option>
-                            <option>Forward</option>
+                        <select id="type" name="type" class="form-control" required>
+                            <option selected disabled>Type</option>
+                            <% aircrafts.forEach((aircraft, index) => { %>
+
+                            <option><%= aircraft.type %></option>
+
+                            <% }) %>
+
                         </select>
-                    </div-->
+                    </div>
+                    
                 </div>
                 <button type="submit" class="primary-btn" style="background-color: rgba(5, 5, 216, 0.829);">Add an airplane</button>	
             </form>

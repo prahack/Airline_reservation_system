@@ -19,9 +19,17 @@ module.exports = {
     },
     addAirportPage: (req, res) => {
         if (req.session.type == 'admin') {
-            res.render('add-airport.ejs', {
-                title: "Welcome to Airport | Add a new airport"
-                ,message: ''
+            let locationQuery = "SELECT * FROM `location`"; 
+            db.query(locationQuery, (err, result) => {
+                if (err) {
+                    return res.status(500).send(err);
+                } else {
+                    res.render('add-airport.ejs', {
+                        title: "Welcome to Airport | Add a new airport"
+                        , locations: result
+                        , message: ''
+                    });
+                }
             });
         } else {
             res.redirect('/admin-panel');

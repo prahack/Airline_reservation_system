@@ -88,17 +88,16 @@
                     </div>
                     <div class="form-group col-md-8">
                         <p style="color: black; font-size: 15px;">Location ID of the airport</p>
-                        <input type="text" class="form-control" name="location_ID" id="location_ID" placeholder="Location ID" required>
-                    </div>
-                    <!--div class="form-group col-md-8">
-                        <select id="position" name="position" class="form-control" required>
-                            <option selected disabled>Choose position</option>
-                            <option>Goalkeeper</option>
-                            <option>Defender</option>
-                            <option>Midfielder</option>
-                            <option>Forward</option>
+                        <select id="location_ID" name="location_ID" class="form-control" required>
+                            <option selected disabled>Location ID</option>
+                            <% locations.forEach((location, index) => { %>
+
+                                <option value="<%= location.location_ID%>"><%= location.location_ID %> (<%= location.parent%>, <%= location.child%>)</option>
+
+                            <% }) %>
+
                         </select>
-                    </div-->
+                    </div>
                 </div>
                 <button type="submit" class="primary-btn" style="background-color: rgba(5, 5, 216, 0.829);">Add an airport</button>	
             </form>

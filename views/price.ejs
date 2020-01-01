@@ -104,6 +104,9 @@
                         <a href="/admin-seat">Seats</a>
                     </li>
                     <li>
+                        <a href="/admin-viewbookings">Bookings</a>
+                    </li>
+                    <li>
                         <a href="/admin-report">Reports</a>
                     </li>
                 </ul>
@@ -133,8 +136,8 @@
                                 <td><%= price.business_price %></td>
                                 <td><%= price.platinum_price %></td>
                                 <td>
-                                    <a href="/edit/<%= price.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                    <a href="/delete/<%= price.id %>" class="btn btn-sm btn-danger">Delete</a>
+                                    <a href="/edit-price/<%= price.flight_schedule_ID %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
+                                    <a href="/delete-price/<%= price.flight_schedule_ID %>" class="btn btn-sm btn-danger">Delete</a>
                                 </td>
                             </tr>
                         <% }) %>

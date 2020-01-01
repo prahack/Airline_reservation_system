@@ -55,15 +55,15 @@ module.exports = {
         }
         
     },
-    editFlightPage: (req, res) => {
+    editAircraftPage: (req, res) => {
         if (req.session.type  == 'admin') {
-            let flight_ID = req.params.id;
-            let query = "SELECT * FROM `flight` WHERE id = '" + flight_ID + "' ";
+            let type = req.params.type;
+            let query = "SELECT * FROM `aircraft` WHERE type = '" + type + "' ";
             db.query(query, (err, result) => {
                 if (err) {
                     return res.status(500).send(err);
                 }
-                res.render('edit-flight.ejs', {
+                res.render('edit-aircraft.ejs', {
                     title: "Edit  Flight"
                     ,flight: result[0]
                     ,message: ''

@@ -104,6 +104,9 @@
                         <a href="/admin-seat">Seats</a>
                     </li>
                     <li>
+                        <a href="/admin-viewbookings">Bookings</a>
+                    </li>
+                    <li>
                         <a href="/admin-report">Reports</a>
                     </li>
                 </ul>
@@ -121,19 +124,14 @@
                         <TH>Location ID</TH>
                         <TH>Parent</TH>
                         <TH>Child</TH>
-                        <th>Edit / Delete</th>  
                     </TR>
                     </THEAD>
                     <TBODY>
                         <% location.forEach((location, index) => { %>
                             <tr>
-                                <td scope="row"><%= location.location_ID %></td>
-                                <td><%= location.parent %></td>
-                                <td><%= location.child %></td>
-                                <td>
-                                    <a href="/edit/<%= location.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                    <a href="/delete/<%= location.id %>" class="btn btn-sm btn-danger">Delete</a>
-                                </td>
+                                <td style="width:400px;" scope="row"><%= location.location_ID %></td>
+                                <td style="width:400px;" ><%= location.parent %></td>
+                                <td style="width:400px;" ><%= location.child %></td>
                             </tr>
                         <% }) %>
                     </TBODY>

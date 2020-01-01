@@ -19,9 +19,17 @@ module.exports = {
     },
     addAirplanePage: (req, res) => {
         if (req.session.type == 'admin') {
-            res.render('add-airplanes.ejs', {
-                title: "Welcome to Airplane | Add a new airplane"
-                ,message: ''
+            let aircraftQuery = "SELECT * FROM `aircraft`";  
+            db.query(aircraftQuery, (err, result) => {
+                if (err) {
+                    return res.status(500).send(err);
+                } else {
+                    res.render('add-airplanes.ejs', {
+                        title: "Welcome to Airplane | Add a new airplane"
+                        , aircrafts: result
+                        , message: ''
+                    });
+                }
             });
         } else {
             res.redirect('/admin-panel');

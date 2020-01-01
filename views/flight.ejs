@@ -104,6 +104,9 @@
                         <a href="/admin-seat">Seats</a>
                     </li>
                     <li>
+                        <a href="/admin-viewbookings">Bookings</a>
+                    </li>
+                    <li>
                         <a href="/admin-report">Reports</a>
                     </li>
                 </ul>
@@ -121,19 +124,14 @@
                         <TH>Flight Id</TH>
                         <TH>Origin</TH>
                         <TH>Destination</TH>
-                        <th>Edit / Delete</th>  
                     </TR>
                     </THEAD>
                     <TBODY>
                         <% flights.forEach((flight, index) => { %>
                             <tr>
-                                <td scope="row"><%= flight.flight_ID %></td>
-                                <td><%= flight.origin %></td>
-                                <td><%= flight.destination %></td>
-                                <td>
-                                    <a href="/edit-flight/<%- flight.flight_ID %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                    <a href="/delete/<%- flight.flight_ID %>" class="btn btn-sm btn-danger">Delete</a>
-                                </td>
+                                <td style="width:400px;" scope="row"><%= flight.flight_ID %></td>
+                                <td style="width:400px;" ><%= flight.origin %></td>
+                                <td style="width:400px;" ><%= flight.destination %></td>
                             </tr>
                         <% }) %>
                     </TBODY>

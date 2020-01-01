@@ -19,14 +19,22 @@ module.exports = {
     },
     addFlightDelayPage: (req, res) => {
         if (req.session.type == 'admin') {
-            res.render('add-flightDelay.ejs', {
-                title: "Welcome to Flight Delay | Add a new flight delay"
-                ,message: ''
+            let flightScheduleQuery = "SELECT * FROM `flight_schedule`";
+            db.query(flightScheduleQuery, (err, result) => {
+                if (err) {
+                    return res.status(500).send(err);
+                } else {
+                    res.render('add-flightDelay.ejs', {
+                        title: "Welcome to Flight Delay | Add a new flight delay"
+                        , schedules: result
+                        , message: ''
+                    });
+                }
             });
         } else {
             res.redirect('/admin-panel');
         }
-        
+
     },
     addFlightDelay: (req, res) => {
         if (req.session.type == 'admin') {
@@ -56,17 +64,17 @@ module.exports = {
         }
         
     },
-    editFlightPage: (req, res) => {
+    editFlightDelayPage: (req, res) => {
         if (req.session.type == 'admin') {
-            let flight_ID = req.params.id;
-        let query = "SELECT * FROM `flight` WHERE id = '" + flight_ID + "' ";
+            let delay_ID = req.params.delay_ID;
+        let query = "SELECT * FROM `flight_delay` WHERE delay_ID = '" + delay_ID + "' ";
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
-            res.render('edit-flight.ejs', {
-                title: "Edit  Flight"
-                ,flight: result[0]
+            res.render('edit-flightDelay.ejs', {
+                title: "Edit  Flight Delay"
+                ,flightDelay: result[0]
                 ,message: ''
             });
         });
@@ -75,22 +83,43 @@ module.exports = {
         }
         
     },
-    editFlight: (req, res) => {
+    editFlightDelay: (req, res) => {
         if (req.session.type == 'admin') {
-            let flight_ID = req.params.flight_ID;
-        let origin = req.body.origin;
-        let destination = req.body.destination;
+        let delay_ID = req.params.delay_ID;
+        let flight_schedule_ID = req.body.flight_schedule_ID;
+        let delayed_time = req.body.delayed_time;
+        let reason = req.body.reason;
 
-        let query = "UPDATE `flight` SET `flight_ID` = '" + flight_ID + "', `origin` = '" + origin + "', `destination` = '" + destination + "'";
+        let query = "UPDATE `flight_delay` SET `flight_schedule_ID` = '" + flight_schedule_ID + "', `delayed_time` = '" + delayed_time + "', `reason` = '" + reason +"' WHERE `flight_delay`.`delay_ID` = '" + delay_ID + "'";
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
-            res.redirect('/');
+            res.redirect('/admin-flightDelay');
         });
         } else {
             res.redirect('/admin-panel');
         }
         
     },
+    deleteFlightDelay: (req, res) => {
+        let delay_ID = req.params.delay_ID;
+        let flight_schedule_ID = req.params.flight_schedule_ID;
+        let delayed_time = req.params.delayed_time;
+        let reason = req.params.reason;
+        let getidQuery = 'SELECT flight_schedule_ID from `flight_delay` WHERE delay_ID = "' + delay_ID + '"';
+        let deleteDelayQuery = 'DELETE FROM flight_delay WHERE delay_ID = "' + delay_ID + '"';
+
+        db.query(getidQuery, (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            db.query(deleteDelayQuery, (err, result) => {
+                if (err) {
+                    return res.status(500).send(err);
+                }
+                res.redirect('/admin-flightDelay');
+            });
+        });
+    }
 };
