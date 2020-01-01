@@ -47,7 +47,7 @@ let dropTrigger1 = "DROP TRIGGER ageCheck;"
 let sqlTrigger1 = "create trigger ageCheck before insert on `passenger` for each row if new.age < 0 then set new.age = 0 ; end if;"
 db.query(dropTrigger1,(err,result1) => {
     if (err) {
-        console.log(err);
+        console.log(err);  
     } else {
         db.query(sqlTrigger1,(err, result) => {
             console.log(err);
