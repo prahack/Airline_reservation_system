@@ -126,8 +126,17 @@ module.exports = {
                              db.query(query,(err, result1) => {
                                 if (err) {
                                     return res.status(500).send(err);
+                                } else {
+                                    console.log(result1['insertId']);
+                                    bID = result1['insertId'];
+                                    let ticket = "insert into `ticket` (booking_ID) values ('" + bID + "')";
+                                    db.query(ticket, (err, result2) =>{
+                                        if (err) {
+                                            return res.status(500).send(err);
+                                        }
+                                        res.redirect('/');
+                                    });
                                 }
-                                res.redirect('/');
                              });
                          }
                     });
@@ -138,8 +147,17 @@ module.exports = {
                          console.log(result);
                          if (err) {
                              return res.status(500).send(err);
+                         } else {
+                            console.log(result1['insertId']);
+                            bID = result1['insertId'];
+                            let ticket = "insert into `ticket` (booking_ID) values ('" + bID + "')";
+                            db.query(ticket, (err, result2) =>{
+                                if (err) {
+                                    return res.status(500).send(err);
+                                }
+                                res.redirect('/');
+                            });
                          }
-                         res.redirect('/');
                      });
                 }
             }
