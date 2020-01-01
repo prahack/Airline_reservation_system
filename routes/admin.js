@@ -10,7 +10,7 @@ module.exports = {
             }
             res.render('admin.ejs', {
                 title: ''
-                ,admins: result
+                , admins: result
             });
         });
     },
@@ -20,13 +20,13 @@ module.exports = {
         let coPassword = req.body.coPassword;
 
         let usernameQuery = "SELECT * FROM `admin` WHERE username = '" + username + "'";
-        if(password != coPassword){
+        if (password != coPassword) {
             message = 'password confirmation fail';
-                res.render('admin.ejs', {
-                    message,
-                });
+            res.render('admin.ejs', {
+                message,
+            });
         } else {
-            if (validateEmail(username)) { 
+            if (validateEmail(username)) {
                 db.query(usernameQuery, (err, result) => {
                     if (err) {
                         return res.status(500).send(err);
@@ -38,24 +38,24 @@ module.exports = {
                         });
                     } else {
                         let query = "INSERT INTO `admin` (username, password) VALUES ('" +
-                                    username + "', '" + password + "')";
-                                db.query(query, (err, result) => {
+                            username + "', '" + password + "')";
+                        db.query(query, (err, result) => {
+                            if (err) {
+                                return res.status(500).send(err);
+                            } else {
+                                console.log(result['insertId']);
+                                admin_ID = result['insertId'];
+                                let pw = md5(password);
+                                db.query(q, (err, result) => {
                                     if (err) {
                                         return res.status(500).send(err);
                                     } else {
-                                        console.log(result['insertId']);
-                                        admin_ID = result['insertId'];
-                                        let pw = md5(password);
-                                        db.query(q, (err, result) => {
-                                            if (err) {
-                                                return res.status(500).send(err);
-                                            }else {
-                                                res.redirect('/');
-                                            }
-                                        });
-                                            
+                                        res.redirect('/');
                                     }
                                 });
+
+                            }
+                        });
                     }
                 });
             } else {
@@ -67,7 +67,7 @@ module.exports = {
         }
     },
     getLoginAdmin: (req, res) => {
-        message =''
+        message = ''
         if (req.session.type == undefined) {
             res.render('admin.ejs', {
                 message
@@ -75,7 +75,7 @@ module.exports = {
         } else {
             res.redirect('/admin-flight');
         }
-        
+
     },
     loginAdmin: (req, res) => {
         let username = req.body.username;
@@ -83,12 +83,12 @@ module.exports = {
         console.log(username);
         console.log(password);
         let usernameQuery = "SELECT * FROM `admin` WHERE username = '" + username + "'";
-        db.query(usernameQuery,(err, result) => {
+        db.query(usernameQuery, (err, result) => {
             let x = (result == 0);
             if (err) {
                 return res.status(500).send(err);
             }
-            if ( x ) {
+            if (x) {
                 message = 'incorrect username or password';
                 res.render('admin.ejs', {
                     message,
@@ -112,7 +112,7 @@ module.exports = {
 
     },
     getbookingsByPassengerType: (req, res) => {
-        message =''
+        message = ''
         res.render('bookings-by-passenger-type.ejs', {
             message
         });
@@ -126,14 +126,14 @@ module.exports = {
 
         let gold;
         let frequent;
-        db.query(q1,(err, result1) => {
+        db.query(q1, (err, result1) => {
             console.log(result1);
             frequent = result1[0]['count(`booking_ID`)'];
 
-            db.query(q2,(err, result2) => {
+            db.query(q2, (err, result2) => {
                 console.log(result2);
                 gold = result2[0]['count(`booking_ID`)'];
-                db.query(q3,(err, result3) => {
+                db.query(q3, (err, result3) => {
                     console.log(result3);
                     guest = result3[0]['count(`booking_ID`)'];
 
@@ -148,19 +148,19 @@ module.exports = {
                     });
 
                 });
-                
+
             });
         });
-        
+
         console.log(startDate);
     },
     getDetails: (req, res) => {
         let query = "select name,airport_code from `airport` order by name asc";
-        db.query(query,(err, result) => {
-            message =''
+        db.query(query, (err, result) => {
+            message = ''
             res.render('details-by-origin-destination.ejs', {
                 message,
-                airports:result
+                airports: result
             });
         });
     },
@@ -171,15 +171,30 @@ module.exports = {
         var datetime = new Date();
         //datetime.setTimezone('Asia/Colombo');
         console.log(datetime);
-        console.log(datetime.toISOString().slice(0,10));
+        console.log(datetime.toISOString().slice(0, 10));
         console.log(origin);
         console.log(destination);
-        let q = "select * from `flight_schedule` where `date` < '"+datetime.toISOString().slice(0,10)+"'";
-        db.query(q,(err, result) => {
+        let q = "select * from `flight_schedule` natural join `airplane` where `date` < '" + datetime.toISOString().slice(0, 10) + "'";
+        let r = "select count(passenger_ID) as a from booking where flight_schedule_ID in (select flight_schedule_ID from flight natural join flight_schedule where origin='" + origin + "' and destination='" + destination + "' and date<'" + datetime.toISOString().slice(0, 10) + "')";
+        db.query(q, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             } else {
-                console.log(result);
+                db.query(r, (err, result1) => {
+                    if (err) {
+                        return res.status(500).send(err);
+                    } else {
+                        console.log(result);
+                        res.render('getDetails.ejs', {
+                            flights: result,
+                            details: result1,
+                            origin: origin,
+                            destination: destination
+                        });
+
+                    }
+                });
+
             }
         });
 
