@@ -94,9 +94,25 @@
                             <th>Total Revenue</th>
                         </TR>
                         <tr>
+                            <% if (revenues[0][0].b==null){%>
+                            <td scope="row">0</td>
+                            <%  }else{%>
                             <td scope="row"><%= revenues[0][0].b %></td>
-                            <td><%=revenues[0][0].p%></td>
-                            <td><%= revenues[0][0].e %></td>
+                            <% }%>
+
+
+                            <% if (revenues[0][0].p==null){%>
+                            <td scope="row">0</td>
+                            <%  }else{%>
+                            <td scope="row"><%= revenues[0][0].p %></td>
+                            <% }%>
+
+
+                            <% if (revenues[0][0].e==null){%>
+                            <td scope="row">0</td>
+                            <%  }else{%>
+                            <td scope="row"><%= revenues[0][0].e %></td>
+                            <% }%>
                             <td><%= revenues[0][0].b + revenues[0][0].p+revenues[0][0].e%> </td>
                         </tr>
 
