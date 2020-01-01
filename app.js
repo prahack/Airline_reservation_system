@@ -18,7 +18,10 @@ const {getAdminFlightDelay, addFlightDelayPage, addFlightDelay} = require('./rou
 const {getAdminLocation, addLocationPage, addLocation} = require('./routes/location');
 const {getAdminPrice, addPricePage, addPrice} = require('./routes/price');
 const { searchFlight, searchFlightPage } = require('./routes/searchFlight');
-const { flightBooking, flightBookingPage } = require('./routes/bookFlight');
+const { flightBooking, flightBookingPage} = require('./routes/BookFlight');
+const {addBookingPage, addBooking, } = require('./routes/booking');
+const {getAdminBookingMainPage} = require('./routes/adminBookingMain');
+const {adminAddBookingPage, adminAddBooking, adminDeleteBooking, adminEditBooking, adminEditBookingPage} = require('./routes/adminBooking');
 const port = 5000;
 
 // create connection to database
@@ -97,7 +100,14 @@ app.get('/searchFlight', searchFlightPage);
 app.post('/searchFlight', searchFlight);
 app.get('/bookFlight', flightBookingPage);
 app.post('/bookFlight', flightBooking);
-
+app.get('/add/:id', addBookingPage);
+app.post('/add/:id', addBooking);
+app.get('/adminBooking', getAdminBookingMainPage);
+app.get('/adminAddBooking', adminAddBookingPage);
+//app.get('/adminEditBooking/:id', adminEditBookingPage);
+app.get('/adminDeleteBooking/:id', adminDeleteBooking);
+app.post('/adminAddBooking', adminAddBooking);
+app.post('/AdminEditBooking/:id', adminEditBooking);
 
 
 // set the app to listen on the port
