@@ -119,12 +119,13 @@
                 <TABLE class="table"> 
                     <THEAD>
                     <TR>
-                        <TH>Booking ID</TH>
-                        <TH>Passenger ID</TH>
-                        <TH>Seat ID</TH>
-                        <TH>Flight Schedule ID</TH>
-                        <TH>Booking Date</TH>
-                        <TH>Confirm</TH>
+                        <TH style="width: 150px;">Booking ID</TH>
+                        <TH style="width: 150px;">Passenger ID</TH>
+                        <TH style="width: 130px;">Seat ID</TH>
+                        <TH style="width: 150px;">Flight Schedule ID</TH>
+                        <TH style="width: 150px;">Booking Date</TH>
+                        <TH scope="col">Confirm</TH>
+                        <TH scope="col">Action</TH>
                     </TR>
                     </THEAD>
                     <TBODY>
@@ -137,6 +138,10 @@
                                 <td><%= booking.booking_date %></td>
                                 <td>
                                     <a href="/confirm" target="_blank" rel="noopener" class="btn btn-sm btn-success">Confirm</a>
+                                </td>
+                                <td>
+                                    <a href="/edit-booking/<%= booking.booking_ID %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
+                                    <a href="/delete-booking/<%= booking.booking_ID %>" class="btn btn-sm btn-danger">Delete</a>
                                 </td>
                             </tr>
                         <% }) %>
