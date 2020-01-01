@@ -26,7 +26,7 @@ const {addBookingPage, addBooking, } = require('./routes/booking');
 const {getAdminBookingMainPage} = require('./routes/adminBookingMain');
 const {adminAddBookingPage, adminAddBooking, adminDeleteBooking, adminEditBooking, adminEditBookingPage} = require('./routes/adminBooking');
 const { flightBooking, flightBookingPage } = require('./routes/bookFlight');
-const { searchByFlightNoPage, searchByFlightNo, numberOFPassengers, numberOFPassengersPage } = require('./routes/adminSearch');
+const { searchByFlightNoPage, searchByFlightNo, numberOFPassengers, numberOFPassengersPage, totalRevenuePage, totalRevenue } = require('./routes/adminSearch');
 const port = 5000;
 process.env.TZ = 'Asia/Colombo';
 // create connection to database
@@ -163,6 +163,9 @@ app.get('/searchByFlightNo', searchByFlightNoPage);
 app.post('/searchByFlightNo', searchByFlightNo);
 app.get('/numberOFPassengers', numberOFPassengersPage);
 app.post('/numberOFPassengers', numberOFPassengers);
+app.get('/totalRevenue', totalRevenuePage);
+app.post('/totalRevenue', totalRevenue);
+
 
 
 
