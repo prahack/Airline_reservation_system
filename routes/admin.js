@@ -138,7 +138,7 @@ module.exports = {
                     guest = result3[0]['count(`booking_ID`)'];
 
                     message = 'hiii'
-                    res.render('search-results.ejs', {
+                    res.render('search-results-bookings-by-passenger-type.ejs', {
                         message,
                         startDate,
                         endDate,
