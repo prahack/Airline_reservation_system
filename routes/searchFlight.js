@@ -36,7 +36,10 @@ module.exports = {
             else {
                 //console.log(result)
                 res.render('searchFlightResult.ejs', {
-                    flights: result
+                    flights: result,
+                    origin: origin,
+                    destination: destination
+
                 });
             }
 
