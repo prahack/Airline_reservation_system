@@ -104,25 +104,42 @@ module.exports = {
                 return res.status(500).send(err);
             }
             if (result.length > 0) {
-                console.log('if');
                 message = 'Seat already booked';
                 res.render('add-booking.ejs', {
                     message,
                     title: 'Welcome to airline_reservation_system | Add a new booking'
                 });
             } else {
-                console.log('else');
-                 // send the booking's details to the database
-                let query = "INSERT INTO `booking` (passenger_ID, seat_ID, flight_schedule_ID, booking_date) VALUES ('" + passenger_ID + "', '" + seat_ID + "', '" + flight_schedule_ID + "', '" + booking_date + "')";
-                db.query(query, (err, result) => {
-                    console.log(result);
-                    if (err) {
-                        return res.status(500).send(err);
-                    }
-                    res.redirect('/');
-                });
-
-        }
+                if (req.session.email == undefined) {
+                    let insertGP = "insert into `passenger` (name, age, email, type, number_of_times) VALUES('"+ name +"','"+ age +"','"+ email +"','Guest',1)";
+                    db. query(insertGP,(err, result) => {
+                        console.log(result);
+                         if (err) {
+                             return res.status(500).send(err);
+                         } else {
+                             console.log(result['insertId']);
+                             pasID = result['insertId'];
+                             let query = "INSERT INTO `booking` (passenger_ID, seat_ID, flight_schedule_ID, booking_date) VALUES ('" + pasID + "', '" + seat_ID + "', '" + flight_schedule_ID + "', '" + booking_date + "')";
+                             db.query(query,(err, result1) => {
+                                if (err) {
+                                    return res.status(500).send(err);
+                                }
+                                res.redirect('/');
+                             });
+                         }
+                    });
+                } else {
+                     // send the booking's details to the database
+                     let query = "INSERT INTO `booking` (passenger_ID, seat_ID, flight_schedule_ID, booking_date) VALUES ('" + passenger_ID + "', '" + seat_ID + "', '" + flight_schedule_ID + "', '" + booking_date + "')";
+                     db.query(query, (err, result) => {
+                         console.log(result);
+                         if (err) {
+                             return res.status(500).send(err);
+                         }
+                         res.redirect('/');
+                     });
+                }
+            }
         });
     }, 
 };
