@@ -19,7 +19,7 @@ module.exports = {
                 db.query(dateQuery, (err, result) => {
                     console.log(result);
                     plane_id = result[0]['plane_ID'];
-                    flight_id = result[0]['flight_ID'];
+                    flight_id = result[0]['flight_schedule_ID'];
                     console.log(plane_id);
                     if (err) {
                         return res.status(500).send(err);
