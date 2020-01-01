@@ -94,4 +94,24 @@ module.exports = {
         }
         
     },
+    deleteFlightDelay: (req, res) => {
+        let delay_ID = req.params.delay_ID;
+        let flight_schedule_ID = req.params.flight_schedule_ID;
+        let delayed_time = req.params.delayed_time;
+        let reason = req.params.reason;
+        let getidQuery = 'SELECT flight_schedule_ID from `flight_delay` WHERE delay_ID = "' + delay_ID + '"';
+        let deleteDelayQuery = 'DELETE FROM flight_delay WHERE delay_ID = "' + delay_ID + '"';
+
+        db.query(getidQuery, (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            db.query(deleteDelayQuery, (err, result) => {
+                if (err) {
+                    return res.status(500).send(err);
+                }
+                res.redirect('/admin-flightDelay');
+            });
+        });
+    }
 };

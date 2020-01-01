@@ -14,9 +14,9 @@ const { getAdminAirplane, addAirplanePage, addAirplane } = require('./routes/air
 const { getAdminAircraft, addAircraftPage, addAircraft } = require('./routes/aircraft');
 const { getAdminAirport, addAirportPage, addAirport } = require('./routes/airport');
 const { getAdminFlightSchedule, addFlightSchedulePage, addFlightSchedule} = require('./routes/flightSchedule');
-const { getAdminFlightDelay, addFlightDelayPage, addFlightDelay, editFlightDelayPage, editFlightDelay } = require('./routes/flightDelay');
+const { getAdminFlightDelay, addFlightDelayPage, addFlightDelay, editFlightDelayPage, editFlightDelay, deleteFlightDelay } = require('./routes/flightDelay');
 const { getAdminLocation, addLocationPage, addLocation } = require('./routes/location');
-const { getAdminPrice, addPricePage, addPrice } = require('./routes/price');
+const { getAdminPrice, addPricePage, addPrice, editPricePage, editPrice, deletePrice } = require('./routes/price');
 const { getAdminSeat, addSeatPage, addSeat } = require('./routes/seat');
 const { getAdminReport } = require('./routes/report');
 const { searchFlight, searchFlightPage } = require('./routes/searchFlight');
@@ -91,12 +91,16 @@ app.get('/add-flightDelay', addFlightDelayPage)
 app.post('/add-flightdelay', addFlightDelay);
 app.get('/edit-flightDelay/:delay_ID', editFlightDelayPage);
 app.post('/edit-flightDelay/:delay_ID', editFlightDelay);
+app.get('/delete-flightDelay/:delay_ID', deleteFlightDelay);
 app.get('/admin-location', getAdminLocation);
 app.get('/add-location', addLocationPage)
 app.post('/add-location', addLocation);
 app.get('/admin-price', getAdminPrice);
 app.get('/add-price', addPricePage)
 app.post('/add-price', addPrice);
+app.get('/edit-price/:flight_schedule_ID', editPricePage);
+app.post('/edit-price/:flight_schedule_ID', editPrice);
+app.get('/delete-price/:flight_schedule_ID', deletePrice);
 app.get('/admin-seat', getAdminSeat);
 app.get('/add-seat', addSeatPage)
 app.post('/add-seat', addSeat);
