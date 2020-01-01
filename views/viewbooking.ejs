@@ -77,6 +77,9 @@
                 <link href="admin.css" rel="stylesheet">
                 <ul class="nav-menu">
                     <li style="margin-left: -15px;">
+                        <a href="/admin-viewpassenger">Passengers</a>
+                    </li>
+                    <li>
                         <a href="/admin-flight">Flights</a>
                     </li>
                     <li>
@@ -124,8 +127,6 @@
                         <TH style="width: 130px;">Seat ID</TH>
                         <TH style="width: 150px;">Flight Schedule ID</TH>
                         <TH style="width: 150px;">Booking Date</TH>
-                        <TH scope="col">Confirm</TH>
-                        <TH scope="col">Action</TH>
                     </TR>
                     </THEAD>
                     <TBODY>
@@ -136,13 +137,6 @@
                                 <td><%= booking.seat_ID %></td>
                                 <td><%= booking.flight_schedule_ID %></td>
                                 <td><%= booking.booking_date %></td>
-                                <td>
-                                    <a href="/confirm" target="_blank" rel="noopener" class="btn btn-sm btn-success">Confirm</a>
-                                </td>
-                                <td>
-                                    <a href="/edit-booking/<%= booking.booking_ID %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                    <a href="/delete-booking/<%= booking.booking_ID %>" class="btn btn-sm btn-danger">Delete</a>
-                                </td>
                             </tr>
                         <% }) %>
                     </TBODY>
