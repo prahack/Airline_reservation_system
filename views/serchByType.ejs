@@ -52,7 +52,7 @@
             <div class="row align-items-center justify-content-between d-flex">
                 <div id="logo">
                     <!--a href="index.html"><img src="img/logo.png" alt="" title="" /></a-->
-                    <h3 style="color: white;">Airline Reservation System | Admin Panel | Search Passengers</h2>
+                    <h3 style="color: white;">Airline Reservation System | Admin Panel | Total Revenue</h2>
                 </div>
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">
@@ -83,7 +83,7 @@
                         <% if (types.length > 0) {%>
                         <div class="form-group col-md-8">
                             <select id="type" name="type" class="form-control" required>
-                                <option selected disabled style="color: black; font-size: 15px;">Flight No</option>
+                                <option selected disabled style="color: black; font-size: 15px;">Aircraft Type</option>
                                 <% types.forEach((type, index) => { %>
                                 <option><%= types[index].type %> </option>
 
@@ -97,8 +97,7 @@
 
 
                     </div>
-                    <button type="submit" class="primary-btn" style="background-color: rgba(5, 5, 216, 0.829);">Search
-                        Passengers</button>
+                    <button type="submit" class="primary-btn" style="background-color: rgba(5, 5, 216, 0.829);">Find total revenue</button>
                 </form>
             </div>
         </div>
