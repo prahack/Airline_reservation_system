@@ -55,13 +55,27 @@ db.query(dropTrigger1,(err,result1) => {
         console.log(err);  
     } else {
         db.query(sqlTrigger1,(err, result) => {
-            console.log(err);
+            if (err) {
+                console.log(err);
+            }
         });
     }
 });
 
 let dropTrigger2 = "drop trigger if exists changePassengerType;"
-let sqlTrigger2 = "create trigger changePassengerType before insert on `passenger` for each new.number_of_times >10 then set new.type ='Gold'; end if; "
+let sqlTrigger2 = "create trigger changePassengerType before update on `passenger` for each row if new.number_of_times >=10 then set new.type ='Gold'; end if; "
+
+db.query(dropTrigger2,(err,result) => {
+    if (err) {
+        console.log(err);
+    } else {
+        db.query(sqlTrigger2,(err,result) => {
+            if(err) {
+                console.log(err);
+            }
+        })
+    }
+})
 
 
 // configure middleware

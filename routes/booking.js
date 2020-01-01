@@ -116,7 +116,7 @@ module.exports = {
                 message = 'Seat already booked';
                 res.render('add-booking.ejs', {
                     message,
-                    title: 'Welcome to airline_reservation_system | Add a new booking'
+                    title: 'Welcome to airline_reservation_system | Add a new booking',
                 });
             } else {
                 if (req.session.email == undefined) {
@@ -158,15 +158,15 @@ module.exports = {
                          if (err) {
                              return res.status(500).send(err);
                          } else {
-                            console.log(result1['insertId']);
-                            bID = result1['insertId'];
+                            console.log(result['insertId']);
+                            bID = result['insertId'];
                             //let ticket = "insert into `ticket` (booking_ID) values ('" + bID + "')";
                             let ticket = "insert into `ticket` (booking_ID) values (?)";
                             db.query(ticket,[bID], (err, result2) =>{
                                 if (err) {
                                     return res.status(500).send(err);
                                 } else {
-                                    
+
                                 }
                                 res.redirect('/');
                             });
