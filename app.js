@@ -60,6 +60,9 @@ db.query(dropTrigger1,(err,result1) => {
     }
 });
 
+let dropTrigger2 = "drop trigger if exists changePassengerType;"
+let sqlTrigger2 = "create trigger changePassengerType before insert on `passenger` for each new.number_of_times >10 then set new.type ='Gold'; end if; "
+
 
 // configure middleware
 app.set('port', process.env.port || port); // set express to use this port

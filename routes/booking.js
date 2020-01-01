@@ -25,42 +25,58 @@ module.exports = {
                         return res.status(500).send(err);
                     }
                     else {
-                        let seatQuery = "select seat_ID from `seat` where plane_ID = '" + plane_id + "'";
+                        let seatQuery = "select * from `seat` where plane_ID = '" + plane_id + "'";
                         let seatQuery2 = "select seat_ID from `booking` where flight_schedule_ID = '" + flight_id + "'";
 
                         db.query(seatQuery,(err, result2) => {
                             if (err) {
                                 return res.status(500).send(err);
                             } else {
+                                let pricesQ = "select * from `price` where flight_schedule_ID = '"+ flight_id +"'";
                                 console.log(result2);
-                                db.query(seatQuery2,(err, result3) => {
+                                db.query(pricesQ,(err, prices) => {
                                     if (err) {
                                         return res.status(500).send(err);
                                     } else {
-                                        y = [];
-                                        for (x of result2) {
-                                            y.push(x['seat_ID']);
-                                        }
-                                        z = [];
-                                        for (x of result3) {
-                                            z.push(x['seat_ID']);
-                                        }
-                                       
-                                        console.log(result3);
-                                        console.log(result2.length);
-                                        var seats = y.filter(function(obj) { return z.indexOf(obj) == -1; });
-                                        console.log(seats);
-                                        res.render('add-booking.ejs', {
-                                            title: 'Welcome to airline_reservation_system | Add a new booking',
-                                            flight_schedule: result[0], 
-                                            id,
-                                            email,
-                                            user,
-                                            seats
+                                        db.query(seatQuery2,(err, result3) => {
+                                            if (err) {
+                                                return res.status(500).send(err);
+                                            } else {
+                                                y = [];
+                                                for (x of result2) {
+                                                    y.push(x['seat_ID']);
+                                                }
+                                                z = [];
+                                                for (x of result3) {
+                                                    z.push(x['seat_ID']);
+                                                }
+                                               
+                                                console.log(result3);
+                                                console.log(result2.length);
+                                                var st = y.filter(function(obj) { return z.indexOf(obj) == -1; });
+        
+                                                seats = []
+        
+                                                for (x of result2) {
+                                                    if (st.includes(x['seat_ID'])) {
+                                                        seats.push(x);
+                                                    }
+                                                }
+        
+                                                console.log(seats);
+                                                res.render('add-booking.ejs', {
+                                                    title: 'Welcome to airline_reservation_system | Add a new booking',
+                                                    flight_schedule: result[0], 
+                                                    id,
+                                                    email,
+                                                    user,
+                                                    seats,
+                                                    prices:prices[0]
+                                                });
+                                            }
                                         });
                                     }
                                 });
-                                
                             }
                         });
                     }
@@ -79,7 +95,10 @@ module.exports = {
         let seat_ID = req.body.seat_ID;
         let flight_schedule_ID = req.params.id;
         let passenger_ID = req.body.passenger_id;
-        let booking_date = req.body.date;
+        // let booking_date = req.body.date;
+        var datetime = new Date();
+        console.log(datetime.toISOString().slice(0,10));
+        let booking_date = datetime.toISOString().slice(0,10);
         let bookingQuery = "SELECT * FROM `booking` WHERE flight_schedule_ID = '" + flight_schedule_ID + "' AND seat_ID = '" + seat_ID + "'";
 
         db.query(bookingQuery, (err, result) => {
@@ -88,25 +107,42 @@ module.exports = {
                 return res.status(500).send(err);
             }
             if (result.length > 0) {
-                console.log('if');
                 message = 'Seat already booked';
                 res.render('add-booking.ejs', {
                     message,
                     title: 'Welcome to airline_reservation_system | Add a new booking'
                 });
             } else {
-                console.log('else');
-                 // send the booking's details to the database
-                let query = "INSERT INTO `booking` (passenger_ID, seat_ID, flight_schedule_ID, booking_date) VALUES ('" + passenger_ID + "', '" + seat_ID + "', '" + flight_schedule_ID + "', '" + booking_date + "')";
-                db.query(query, (err, result) => {
-                    console.log(result);
-                    if (err) {
-                        return res.status(500).send(err);
-                    }
-                    res.redirect('/');
-                });
-
-        }
+                if (req.session.email == undefined) {
+                    let insertGP = "insert into `passenger` (name, age, email, type, number_of_times) VALUES('"+ name +"','"+ age +"','"+ email +"','Guest',1)";
+                    db. query(insertGP,(err, result) => {
+                        console.log(result);
+                         if (err) {
+                             return res.status(500).send(err);
+                         } else {
+                             console.log(result['insertId']);
+                             pasID = result['insertId'];
+                             let query = "INSERT INTO `booking` (passenger_ID, seat_ID, flight_schedule_ID, booking_date) VALUES ('" + pasID + "', '" + seat_ID + "', '" + flight_schedule_ID + "', '" + booking_date + "')";
+                             db.query(query,(err, result1) => {
+                                if (err) {
+                                    return res.status(500).send(err);
+                                }
+                                res.redirect('/');
+                             });
+                         }
+                    });
+                } else {
+                     // send the booking's details to the database
+                     let query = "INSERT INTO `booking` (passenger_ID, seat_ID, flight_schedule_ID, booking_date) VALUES ('" + passenger_ID + "', '" + seat_ID + "', '" + flight_schedule_ID + "', '" + booking_date + "')";
+                     db.query(query, (err, result) => {
+                         console.log(result);
+                         if (err) {
+                             return res.status(500).send(err);
+                         }
+                         res.redirect('/');
+                     });
+                }
+            }
         });
     }, 
 };
