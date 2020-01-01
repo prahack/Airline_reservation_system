@@ -25,42 +25,58 @@ module.exports = {
                         return res.status(500).send(err);
                     }
                     else {
-                        let seatQuery = "select seat_ID from `seat` where plane_ID = '" + plane_id + "'";
+                        let seatQuery = "select * from `seat` where plane_ID = '" + plane_id + "'";
                         let seatQuery2 = "select seat_ID from `booking` where flight_schedule_ID = '" + flight_id + "'";
 
                         db.query(seatQuery,(err, result2) => {
                             if (err) {
                                 return res.status(500).send(err);
                             } else {
+                                let pricesQ = "select * from `price` where flight_schedule_ID = '"+ flight_id +"'";
                                 console.log(result2);
-                                db.query(seatQuery2,(err, result3) => {
+                                db.query(pricesQ,(err, prices) => {
                                     if (err) {
                                         return res.status(500).send(err);
                                     } else {
-                                        y = [];
-                                        for (x of result2) {
-                                            y.push(x['seat_ID']);
-                                        }
-                                        z = [];
-                                        for (x of result3) {
-                                            z.push(x['seat_ID']);
-                                        }
-                                       
-                                        console.log(result3);
-                                        console.log(result2.length);
-                                        var seats = y.filter(function(obj) { return z.indexOf(obj) == -1; });
-                                        console.log(seats);
-                                        res.render('add-booking.ejs', {
-                                            title: 'Welcome to airline_reservation_system | Add a new booking',
-                                            flight_schedule: result[0], 
-                                            id,
-                                            email,
-                                            user,
-                                            seats
+                                        db.query(seatQuery2,(err, result3) => {
+                                            if (err) {
+                                                return res.status(500).send(err);
+                                            } else {
+                                                y = [];
+                                                for (x of result2) {
+                                                    y.push(x['seat_ID']);
+                                                }
+                                                z = [];
+                                                for (x of result3) {
+                                                    z.push(x['seat_ID']);
+                                                }
+                                               
+                                                console.log(result3);
+                                                console.log(result2.length);
+                                                var st = y.filter(function(obj) { return z.indexOf(obj) == -1; });
+        
+                                                seats = []
+        
+                                                for (x of result2) {
+                                                    if (st.includes(x['seat_ID'])) {
+                                                        seats.push(x);
+                                                    }
+                                                }
+        
+                                                console.log(seats);
+                                                res.render('add-booking.ejs', {
+                                                    title: 'Welcome to airline_reservation_system | Add a new booking',
+                                                    flight_schedule: result[0], 
+                                                    id,
+                                                    email,
+                                                    user,
+                                                    seats,
+                                                    prices:prices[0]
+                                                });
+                                            }
                                         });
                                     }
                                 });
-                                
                             }
                         });
                     }
