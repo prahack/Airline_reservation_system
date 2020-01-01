@@ -20,8 +20,15 @@ const { getAdminPrice, addPricePage, addPrice, editPricePage, editPrice, deleteP
 const { getAdminSeat, addSeatPage, addSeat } = require('./routes/seat');
 const { getAdminReport } = require('./routes/report');
 const { searchFlight, searchFlightPage } = require('./routes/searchFlight');
+<<<<<<< HEAD
+const { flightBooking, flightBookingPage} = require('./routes/BookFlight');
+const {addBookingPage, addBooking, } = require('./routes/booking');
+const {getAdminBookingMainPage} = require('./routes/adminBookingMain');
+const {adminAddBookingPage, adminAddBooking, adminDeleteBooking, adminEditBooking, adminEditBookingPage} = require('./routes/adminBooking');
+=======
 const { flightBooking, flightBookingPage } = require('./routes/bookFlight');
 const { searchByFlightNoPage, searchByFlightNo, numberOFPassengers, numberOFPassengersPage } = require('./routes/adminSearch');
+>>>>>>> 33afe4e30d6e83238f1547991c36b0dea97bb55f
 const port = 5000;
 process.env.TZ = 'Asia/Colombo';
 // create connection to database
@@ -41,6 +48,20 @@ db.connect((err) => {
     console.log('Connected to database');
 });
 global.db = db;
+
+let dropTrigger1 = "DROP TRIGGER ageCheck;"
+
+let sqlTrigger1 = "create trigger ageCheck before insert on `passenger` for each row if new.age < 0 then set new.age = 0 ; end if;"
+db.query(dropTrigger1,(err,result1) => {
+    if (err) {
+        console.log(err);  
+    } else {
+        db.query(sqlTrigger1,(err, result) => {
+            console.log(err);
+        });
+    }
+});
+
 
 // configure middleware
 app.set('port', process.env.port || port); // set express to use this port
@@ -111,12 +132,23 @@ app.get('/searchFlight', searchFlightPage);
 app.post('/searchFlight', searchFlight);
 app.get('/bookFlight', flightBookingPage);
 app.post('/bookFlight', flightBooking);
+<<<<<<< HEAD
+app.get('/add/:id', addBookingPage);
+app.post('/add/:id', addBooking);
+app.get('/adminBooking', getAdminBookingMainPage);
+app.get('/adminAddBooking', adminAddBookingPage);
+//app.get('/adminEditBooking/:id', adminEditBookingPage);
+app.get('/adminDeleteBooking/:id', adminDeleteBooking);
+app.post('/adminAddBooking', adminAddBooking);
+app.post('/AdminEditBooking/:id', adminEditBooking);
+=======
 app.get('/searchByFlightNo', searchByFlightNoPage);
 app.post('/searchByFlightNo', searchByFlightNo);
 app.get('/numberOFPassengers', numberOFPassengersPage);
 app.post('/numberOFPassengers', numberOFPassengers);
 
 
+>>>>>>> 33afe4e30d6e83238f1547991c36b0dea97bb55f
 
 
 // set the app to listen on the port

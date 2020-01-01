@@ -138,7 +138,7 @@ module.exports = {
                     guest = result3[0]['count(`booking_ID`)'];
 
                     message = 'hiii'
-                    res.render('search-results.ejs', {
+                    res.render('search-results-bookings-by-passenger-type.ejs', {
                         message,
                         startDate,
                         endDate,
@@ -169,14 +169,18 @@ module.exports = {
         let destination = req.body.destination;
         process.env.TZ = 'Asia/Colombo';
         var datetime = new Date();
-        datetime.setTimezone('Asia/Colombo');
+        //datetime.setTimezone('Asia/Colombo');
         console.log(datetime);
         console.log(datetime.toISOString().slice(0,10));
         console.log(origin);
         console.log(destination);
-        let q = "select * from `flight_schedule` where `date` < '"+datetime.toISOString().slice(0,10)+"' and ";
+        let q = "select * from `flight_schedule` where `date` < '"+datetime.toISOString().slice(0,10)+"'";
         db.query(q,(err, result) => {
-            console.log(result);
+            if (err) {
+                return res.status(500).send(err);
+            } else {
+                console.log(result);
+            }
         });
 
     },

@@ -1,0 +1,37 @@
+<%- include ('header.ejs') %>
+    <div class="table-wrapper">
+        <% if (booking.length > 0) {%>
+            <table class="table table-hovered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">booking_ID</th>
+                        <th scope="col">passenger_ID</th>
+                        <th scope="col">seat_ID</th>
+                        <th scope="col">flight_ID</th>
+                        <th scope="col">booking_date</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% booking.forEach((booking) => { %>
+                        <tr>
+                            <th scope="row"><%= booking.booking_ID %></th>
+                            <td><%= booking.passenger_ID %></td>
+                            <td><%= booking.seat_ID %></td>
+                            <td><%= booking.flight_ID %></td>
+                            <td><%= booking.booking_date %></td>
+                            <td>
+                                <a href="/adminEditBooking/<%= booking.booking_ID %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
+                                <a href="/adminDeleteBooking/<%= booking.booking_ID %>" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p class="text-center">No bookings found. Go <a href="/add" >here</a> to add bookings.</p>
+        <% } %>
+    </div>
+</div>
+</body>
+</html>

@@ -15,7 +15,6 @@
                 <th scope="col">Origin</th>
                 <th scope="col"> Destination</th>
                 <th scope="col"> Arrival Time</th>
-                <th scope="col">Date</th>
                 <th scope="col">Departure Time</th>
                 <th scope="col">Action</th>
 
@@ -28,10 +27,9 @@
                 <td><%= flight.origin %></td>
                 <td><%= flight.destination %></td>
                 <td><%= flight.arrival_time %></td>
-                <td><%= flight.date %></td>
                 <td>@<%= flight.departure_time %></td>
                 <td>
-                    <a href="/bookFlight" target="_blank" rel="noopener" class="btn btn-sm btn-success">Book</a>
+                    <a href="/add/<%- flight.flight_schedule_ID %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Book</a>
                 </td>
             </tr>
             <% }) %>
