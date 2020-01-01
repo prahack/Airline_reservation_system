@@ -24,7 +24,7 @@ module.exports = {
         let coPassword = req.body.coPassword;
         console.log(validateEmail(email));
 
-        let emailQuery = "SELECT * FROM `passenger` WHERE email = '" + email + "'";
+        let emailQuery = "SELECT * FROM `passenger` WHERE email = ?";
         if(password != coPassword){
             message = 'password confirmation fail';
                 res.render('signup.ejs', {
@@ -32,7 +32,7 @@ module.exports = {
                 });
         } else {
             if (validateEmail(email)) { 
-                db.query(emailQuery, (err, result) => {
+                db.query(emailQuery,[email], (err, result) => {
                     if (err) {
                         return res.status(500).send(err);
                     }
@@ -42,9 +42,10 @@ module.exports = {
                             message,
                         });
                     } else {
-                        let query = "INSERT INTO `passenger` (name, age, email, type, number_of_times) VALUES ('" +
-                                    name + "', '" + age + "', '" + email + "', 'Frequent', 0)";
-                                db.query(query, (err, result) => {
+                        // let query = "INSERT INTO `passenger` (name, age, email, type, number_of_times) VALUES ('" +
+                        //             name + "', '" + age + "', '" + email + "', 'Frequent', 0)";
+                        let query = "INSERT INTO `passenger` (name, age, email, type, number_of_times) VALUES (?, ?, ?, 'Frequent', 0)";
+                                db.query(query,[name, age, email], (err, result) => {
                                     if (err) {
                                         return res.status(500).send(err);
                                     } else {
@@ -94,8 +95,8 @@ module.exports = {
         let password = req.body.password;
         console.log(email);
         console.log(password);
-        let emailQuery = "SELECT * FROM `account` WHERE email = '" + email + "'";
-        db.query(emailQuery,(err, result) => {
+        let emailQuery = "SELECT * FROM `account` WHERE email = ?";
+        db.query(emailQuery,[email],(err, result) => {
             let x = (result == 0);
             if (err) {
                 return res.status(500).send(err);
