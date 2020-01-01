@@ -40,11 +40,11 @@
                           </ul>			
                       </div>
                       <div class="col-lg-6 col-sm-6 col-6 header-top-right">
-                        <ul>
-                            <li>
-                                <a style="color: red; font-size: large;" title="Click to logout from this account" href="/admin-logout"> Logout</a>
-                            </li>
-                        </ul>
+                          <ul>
+                              <li>
+                                  <a style="color: red; font-size: large;" title="Click to logout from this account" href="/admin-logout"> Logout</a>
+                              </li>
+                          </ul>
                       </div>
                   </div>			  					
                 </div>
@@ -57,10 +57,10 @@
                   </div>
                   <nav id="nav-menu-container">
                     <ul class="nav-menu">
-                      <li><a href="index.html">Home</a></li>
+                      <!-- <li><a href="index.html">Home</a></li>
                       <li><a href="about.html">About</a></li>
                       <li><a href="packages.html">Packages</a></li>					          					          		          
-                      <li><a href="contact.html">Contact</a></li>
+                      <li><a href="contact.html">Contact</a></li> -->
                     </ul>
                   </nav><!-- #nav-menu-container -->					      		  
                 </div>
@@ -80,7 +80,7 @@
                         <a href="/admin-flight">Flights</a>
                     </li>
                     <li>
-                        <a href="/admin-airplane" id="onlink">AirPlanes</a>
+                        <a href="/admin-airplane">AirPlanes</a>
                     </li>
                     <li>
                         <a href="/admin-aircraft">AirCrafts</a>
@@ -104,7 +104,7 @@
                         <a href="/admin-seat">Seats</a>
                     </li>
                     <li>
-                        <a href="/admin-viewbookings">Bookings</a>
+                        <a href="/admin-viewbookings" id="onlink">Bookings</a>
                     </li>
                     <li>
                         <a href="/admin-report">Reports</a>
@@ -113,29 +113,37 @@
             </div>
             <div class="main_container" action="" method="post" enctype="multipart/form-data">
                 <div style="float: right;" class="page-wrapper">
-                    <nav class="primary-btn">
-                        <a style="color: white;" href="/add-airplane" title="Add an airplane">+ Add an AirPlane</a>
-                    </nav>
+                    
                 </div>
-                <% if (airplanes.length > 0) {%>
+                <% if (bookings.length > 0) {%>
                 <TABLE class="table"> 
                     <THEAD>
                     <TR>
-                        <TH>Plane Id</TH>
-                        <TH>Type</TH>
+                        <TH>Booking ID</TH>
+                        <TH>Passenger ID</TH>
+                        <TH>Seat ID</TH>
+                        <TH>Flight Schedule ID</TH>
+                        <TH>Booking Date</TH>
+                        <TH>Confirm</TH>
                     </TR>
                     </THEAD>
                     <TBODY>
-                        <% airplanes.forEach((airplanes, index) => { %>
+                        <% bookings.forEach((booking, index) => { %>
                             <tr>
-                                <td scope="row" style="width:600px;"><%= airplanes.plane_ID %></td>
-                                <td style="width:600px;"><%= airplanes.type %></td>
+                                <td scope="row"><%= booking.booking_ID %></td>
+                                <td><%= booking.passenger_ID %></td>
+                                <td><%= booking.seat_ID %></td>
+                                <td><%= booking.flight_schedule_ID %></td>
+                                <td><%= booking.booking_date %></td>
+                                <td>
+                                    <a href="/confirm" target="_blank" rel="noopener" class="btn btn-sm btn-success">Confirm</a>
+                                </td>
                             </tr>
                         <% }) %>
                     </TBODY>
                 </TABLE>
                 <% } else { %>
-                    <p class="text-center" style="color: black;">No airplanes found. Go <a href="/add-airplane" >here</a> to add flights.</p>
+                    <p class="text-center" style="color: black;">No bookings found.</p>
                 <% } %>
             </div>
         </div>
@@ -146,6 +154,7 @@
         <!-- start footer Area -->		
         <footer class="footer-area section-gap">
             <link rel="stylesheet" href="css/main_admin.css">
+            
         </footer>
         <!-- End footer Area -->	
         <script src="js/vendor/jquery-2.2.4.min.js"></script>

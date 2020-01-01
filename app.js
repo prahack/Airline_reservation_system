@@ -18,6 +18,7 @@ const { getAdminFlightDelay, addFlightDelayPage, addFlightDelay, editFlightDelay
 const { getAdminLocation, addLocationPage, addLocation } = require('./routes/location');
 const { getAdminPrice, addPricePage, addPrice, editPricePage, editPrice, deletePrice } = require('./routes/price');
 const { getAdminSeat, addSeatPage, addSeat } = require('./routes/seat');
+const { getAdminBooking } = require('./routes/viewbooking');
 const { getAdminReport } = require('./routes/report');
 const { searchFlight, searchFlightPage } = require('./routes/searchFlight');
 // const { flightBooking, flightBookingPage} = require('./routes/BookFlight');
@@ -122,6 +123,7 @@ app.get('/delete-price/:flight_schedule_ID', deletePrice);
 app.get('/admin-seat', getAdminSeat);
 app.get('/add-seat', addSeatPage)
 app.post('/add-seat', addSeat);
+app.get ('/admin-viewbookings', getAdminBooking);
 app.get('/admin-report', getAdminReport);
 app.post('/signup', addPassenger);
 app.post('/login', login);
