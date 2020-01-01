@@ -80,7 +80,15 @@
                     </div>
                     <div class="form-group col-md-8">
                         <p style="color: black; font-size: 15px;">ID of the Flight Schedule</p>
-                        <input type="text" class="form-control" name="flight_schedule_ID" id="flight_schedule_ID" placeholder="Flight Schedule ID" required>
+                        <select id="flight_schedule_ID" name="flight_schedule_ID" class="form-control" required>
+                            <option selected disabled>Flight Schedule ID</option>
+                            <% schedules.forEach((schedule, index) => { %>
+
+                            <option value="<%= schedule.flight_schedule_ID %>"><%= schedule.flight_schedule_ID %> (Plane ID <%= schedule.plane_ID %>, Flight ID <%= schedule.flight_ID %>)</option>
+
+                            <% }) %>
+
+                        </select>
                     </div>
                     <div class="form-group col-md-8">
                         <p style="color: black; font-size: 15px;">Price of Economy class</p>

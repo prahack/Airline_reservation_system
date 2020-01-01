@@ -1,25 +1,36 @@
 module.exports = {
     getAdminLocation: (req, res) => {
-        let query = "SELECT * FROM `location`"; // query database to get all the locations
-        // execute query
-        db.query(query, (err, result) => {
-            if (err) {
-                return res.status(500).send(err);
-            }
-            res.render('location.ejs', {
-                title: ''
-                ,location: result
+        if (req.session.type == 'admin') {
+            let query = "SELECT * FROM `location`"; // query database to get all the locations
+            // execute query
+            db.query(query, (err, result) => {
+                if (err) {
+                    return res.status(500).send(err);
+                }
+                res.render('location.ejs', {
+                    title: ''
+                    ,location: result
+                });
             });
-        });
+        } else {
+            res.redirect('/admin-panel');
+        }
+        
     },
     addLocationPage: (req, res) => {
-        res.render('add-location.ejs', {
-            title: "Welcome to Airport | Add a new location"
-            ,message: ''
-        });
+        if (req.session.type == 'admin') {
+            res.render('add-location.ejs', {
+                title: "Welcome to Airport | Add a new location"
+                ,message: ''
+            });
+        } else {
+            res.redirect('/admin-panel');
+        }
+        
     },
     addLocation: (req, res) => {
-        let message = '';
+        if (req.session.type == 'admin') {
+            let message = '';
         let location_ID = req.body.location_ID;
         let parent = req.body.parent;
         let child = req.body.child;
@@ -40,9 +51,14 @@ module.exports = {
             });
             }
         });
+        } else {
+            res.redirect('/admin-panel');
+        }
+        
     },
     editLocationPage: (req, res) => {
-        let flight_ID = req.params.id;
+        if (req.session.type == 'admin') {
+            let flight_ID = req.params.id;
         let query = "SELECT * FROM `flight` WHERE id = '" + flight_ID + "' ";
         db.query(query, (err, result) => {
             if (err) {
@@ -54,18 +70,27 @@ module.exports = {
                 ,message: ''
             });
         });
+        } else {
+            res.redirect('/admin-panel');
+        }
+        
     },
     editFlight: (req, res) => {
-        let flight_ID = req.params.flight_ID;
-        let origin = req.body.origin;
-        let destination = req.body.destination;
-
-        let query = "UPDATE `flight` SET `flight_ID` = '" + flight_ID + "', `origin` = '" + origin + "', `destination` = '" + destination + "'";
-        db.query(query, (err, result) => {
-            if (err) {
-                return res.status(500).send(err);
-            }
-            res.redirect('/');
-        });
+        if (req.session.type == 'admin') {
+            let flight_ID = req.params.flight_ID;
+            let origin = req.body.origin;
+            let destination = req.body.destination;
+    
+            let query = "UPDATE `flight` SET `flight_ID` = '" + flight_ID + "', `origin` = '" + origin + "', `destination` = '" + destination + "'";
+            db.query(query, (err, result) => {
+                if (err) {
+                    return res.status(500).send(err);
+                }
+                res.redirect('/');
+            });
+        } else {
+            res.redirect('/admin-panel');
+        }
+        
     },
 };

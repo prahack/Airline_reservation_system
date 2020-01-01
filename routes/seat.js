@@ -1,15 +1,15 @@
 module.exports = {
-    getAdminAirport: (req, res) => {
+    getAdminSeat: (req, res) => {
         if (req.session.type == 'admin') {
-            let query = "SELECT * FROM `airport`"; // query database to get all the flights
+            let query = "SELECT * FROM `seat`"; // query database to get all the seats
         // execute query
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
-            res.render('airport.ejs', {
+            res.render('seat.ejs', {
                 title: ''
-                ,airports: result
+                ,seat: result
             });
         });
         } else {
@@ -17,16 +17,16 @@ module.exports = {
         }
         
     },
-    addAirportPage: (req, res) => {
+    addSeatPage: (req, res) => {
         if (req.session.type == 'admin') {
-            let locationQuery = "SELECT * FROM `location`"; 
-            db.query(locationQuery, (err, result) => {
+            let airplaneQuery = "SELECT * FROM `airplane`";
+            db.query(airplaneQuery, (err, result) => {
                 if (err) {
                     return res.status(500).send(err);
                 } else {
-                    res.render('add-airport.ejs', {
-                        title: "Welcome to Airport | Add a new airport"
-                        , locations: result
+                    res.render('add-seat.ejs', {
+                        title: "Welcome to Seat | Add a new seat"
+                        , airplanes: result
                         , message: ''
                     });
                 }
@@ -36,26 +36,26 @@ module.exports = {
         }
         
     },
-    addAirport: (req, res) => {
+    addSeat: (req, res) => {
         if (req.session.type == 'admin') {
             let message = '';
-        let airport_code = req.body.airport_code;
-        let name = req.body.name;
-        let location_ID = req.body.location_ID;
+        let seat_ID = req.body.seat_ID;
+        let plane_ID = req.body.plane_ID;
+        let seat_type = req.body.seat_type;
 
-        let airportQuery = "SELECT * FROM `airport`";
+        let seatQuery = "SELECT * FROM `seat`";
 
-        db.query(airportQuery, (err, result) => {
+        db.query(seatQuery, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             } else {
                 // send the flight's details to the database
-                let query = "INSERT INTO `airport` (airport_code, name, location_ID) VALUES ('" + airport_code + "', '" + name +"', '" + location_ID + "')";
+                let query = "INSERT INTO `seat` (seat_ID, plane_ID, seat_type) VALUES ('" + seat_ID + "', '" + plane_ID +"', '" + seat_type + "')";
             db.query(query, (err, result) => {
                 if (err) {
                     return res.status(500).send(err);
                 }
-                res.redirect('/admin-airport');
+                res.redirect('/admin-seat');
             });
             }
         });

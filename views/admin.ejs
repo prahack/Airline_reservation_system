@@ -72,9 +72,12 @@
                                 <h5 style="text-align:center;margin-top:30px; padding-top: 20px;">
                                         Login for Admins
                                     </h5>
-                            <form class="form-wrap" action="" method="post" enctype="multipart/form-data">
-                                <input type="text" class="form-control" name="Username" placeholder="Username " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username '" required>
-                                <input type="password" class="form-control" name="password" placeholder="Password " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password '" required>						
+							<form class="form-wrap" action="" method="post" enctype="multipart/form-data">
+								<% if (message) { %>
+									<p class="text-center text-danger"><%= message %></p>
+								<% } %>
+                                <input type="text" class="form-control" name="username" id="username" placeholder="Username " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username '" required>
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Password " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password '" required>						
 								<button type="submit" class="primary-btn text-uppercase">Login</button>			
                             </form>
                           </div>
