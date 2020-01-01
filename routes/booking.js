@@ -95,7 +95,10 @@ module.exports = {
         let seat_ID = req.body.seat_ID;
         let flight_schedule_ID = req.params.id;
         let passenger_ID = req.body.passenger_id;
-        let booking_date = req.body.date;
+        // let booking_date = req.body.date;
+        var datetime = new Date();
+        console.log(datetime.toISOString().slice(0,10));
+        let booking_date = datetime.toISOString().slice(0,10);
         let bookingQuery = "SELECT * FROM `booking` WHERE flight_schedule_ID = '" + flight_schedule_ID + "' AND seat_ID = '" + seat_ID + "'";
 
         db.query(bookingQuery, (err, result) => {
