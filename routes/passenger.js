@@ -24,7 +24,7 @@ module.exports = {
         let coPassword = req.body.coPassword;
         console.log(validateEmail(email));
 
-        let emailQuery = "SELECT * FROM `passenger` WHERE email = ?";
+        let emailQuery = "SELECT * FROM `account` WHERE email = ?";
         if(password != coPassword){
             message = 'password confirmation fail';
                 res.render('signup.ejs', {
